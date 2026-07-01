@@ -10,7 +10,7 @@ then
   echo Logging to $log/$err
   time python -m CosmoSim --toml $D/dataset.toml --rnd \
          --csvfile $D/dataset.csv --outfile $D/roulette.csv  \
-         --directory $D/images -vvv  > $log 2> $err
+         --directory $D/images -v  > $log 2> $err
 fi
 
 if test x$1 = xsetup
