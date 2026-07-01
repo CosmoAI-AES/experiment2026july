@@ -1,0 +1,8 @@
+*.pth
+torch_cache
+*.err
+*.log
+*.ipynb
+.ipynb_checkpoints
+tmp
+test.*
