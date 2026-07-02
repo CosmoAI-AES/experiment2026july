@@ -1,0 +1,28 @@
+[settings]
+device = "cuda"
+problem = "problem.toml"
+model = "regnet_y_32gf"
+
+[hyperparameters]
+learning-rate = 0.001
+batch-size = 32
+weight-decay = 0.0001
+
+[training]
+num-epochs = 50
+patience = 10
+
+[dataset]
+directory = "images"
+
+[output]
+directory = "experiment001"
+
+[dataset.training]
+filename = "training.csv"
+
+[dataset.testing]
+filename = "testing.csv"
+
+[dataset.validation]
+filename = "validation.csv"
