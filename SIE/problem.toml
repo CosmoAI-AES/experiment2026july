@@ -1,7 +1,7 @@
 [problem]
 filename = "roulette.csv"
 dataset =  "dataset.toml"
-variables = [ "sigma", "xiX", "xiY" ]
+variables = [ "sigma", "sigma2", "theta", "xiX", "xiY" ]
 nterms = 4 
 
 [dataset]
