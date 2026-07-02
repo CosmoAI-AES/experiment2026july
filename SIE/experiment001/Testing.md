@@ -250,7 +250,7 @@ To avoid interference, we make a copy of `params`.
 
 ```{code-cell} ipython3
 cfg["simulator"]["model"] = "Raytrace"
-cfg["simulator"]["centred"] = True
+cfg["simulator"]["centred"] = False
 cfg["lens"] = { "mode" : "SIE" }
 p2 = cs.Parameters( cfg )
 for fn in worst:
