@@ -262,6 +262,11 @@ for fn in worst:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
+The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
+It is significant that the shadow in the difference image around the primary image is either black or white, never both.
+This means that the image is smaller or larger, and not rotated or awfully misshaped in general.
+Clearly, this is a limitation of the roulette formalism, since there is no difference between reconstructed and ground truth simulation.
+
 ```{code-cell} ipython3
 for fn in best:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
@@ -272,43 +277,7 @@ for fn in best:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
-## Debugging
-
-```{code-cell} ipython3
-cfg = { "simulator" : { "centred" : True, "cropsize" : 256, "nterms" : 4 } }
-p2 = cs.Parameters( cfg )
-
-fn = "image-013210.png"
-p2.setRow( orig.loc[fn] )
-
-gtsim = dg.SimImage(param=p2,verbose=0)
-gtim = gtsim.getImage()
-csimg.imshow(gtim)
-```
-
-```{code-cell} ipython3
-amp = gtsim.getData()
-gtamp = gt.loc[fn]
-amp.name = "Recomputed"
-ampdf = pd.DataFrame( [ amp, gtamp, amp-gtamp ] ).transpose()
-display(ampdf)
-```
-
-```{code-cell} ipython3
-dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
-csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation"
-                    , axiscross=True )
-```
-
-This is obviously not a perfect match.
-Most of the discrepancy is due to artifacts of the roulette formalism, but there is a serious discrepancy in the some images.
-Because the visible image is small, it does not take many pixels to make a significant discrepancy.
-
-::: {tip}
-In the last display.  We configured `SimImage` to centre the image on the centre of light. 
-This aligns it with the resimulated images; the parameters used for resimulation assumes this centring.
-We also gave the `axiscross` option to the plot, to have the axis cross showing us the centre of the image.
-:::
+Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
 
 +++
 
@@ -316,5 +285,6 @@ We also gave the `axiscross` option to the plot, to have the axis cross showing 
 
 +++
 
-We see that this machine learning model make accurate prediction as far as optical perception goes.
-Other datasets may prove harder, but this dataset gives no room for further tuning.
+We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
+
+This means that there is nothing to gain from further research on machine learning models at this stage.
