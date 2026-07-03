@@ -1,6 +1,6 @@
 [problem]
 filename = "roulette.csv"
-dataset =  "cluster.toml"
+dataset =  "dataset.toml"
 variables = [ "sigma", "sigma2", "theta", "xiX", "xiY" ]
 nterms = 4 
 
