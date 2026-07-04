@@ -16,6 +16,9 @@ project:
   github: https://github.com/CosmoAI-AES/experiment2026july
   toc:
     - file: index.md
+    - file: [](SIE/index.md)
+    - file: [](cluster2SIE/index.md)
+    - file: [](cluster4SIS/index.md)
 site:
   template: book-theme
   # options:
