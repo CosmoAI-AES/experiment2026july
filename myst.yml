@@ -1,0 +1,39 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 0ed93a19-c9d3-4005-8456-a30a7100b18f
+  title: CosmoSim
+  description: |
+    Test reports from machine learning on gravitational lensing.
+  keywords: 
+      - cosmology 
+      - machine learning 
+      - simulation 
+      - roulette formalism 
+      - gravitational lensing
+  authors: 
+    - Hans Georg Schaathun
+  github: https://github.com/CosmoAI-AES/experiment2026july
+  toc:
+    - file: index.md
+    - file: SIE/Training.ipynb
+    - file: SIE/index.md
+      chapters:
+      - file: SIE/index.md
+      - file: SIE/experiment001/Testing.ipynb
+      - file: SIE/Dataset.ipynb
+    - file: cluster2SIE/index.md
+      chapters:
+      - file: cluster2SIE/index.md
+      - file: cluster2SIE/experiment002/Testing.ipynb
+      - file: cluster2SIE/Dataset.ipynb
+    - file: cluster4SIS/index.md
+      chapters:
+      - file: cluster4SIS/index.md
+      - file: cluster4SIS/experiment002/Testing.ipynb
+      - file: cluster4SIS/Dataset.ipynb
+site:
+  template: book-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
