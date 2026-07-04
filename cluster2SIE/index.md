@@ -3,7 +3,6 @@
 
 + [](Dataset.ipynb)
 + [](experiment002/Testing.ipynb)
-+ See also [](/docs/ML/Pipeline).
 
 The datasets used in the demo are the following.
 

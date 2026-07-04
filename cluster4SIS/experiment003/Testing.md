@@ -13,15 +13,30 @@ kernelspec:
   name: python3
 ---
 
-# Machine Learning on Cluster Lenses
+# Evaluation on the test set
 
 This document evaluates one trained machine learning model,
 see details below.
 We use both conventional metrics and comparison with a 
 resimulated image.
-There is one methodological flaw in the model training.
-The early stopping criterion is based on testing on the same
-test set as we use here.
+
+We use three datafiles, which must be downloaded if this
+document is to be executed.
++ [testing.csv](../testing.csv) is ground truth for model training
++ [test.csv](test.csv) is the predicted amplitudes from machine learning.
++ [dataset.csv](../dataset.csv) is the original lens parameters used to generate
+  the training, testing, and validation data, i.e. it has more
+  rows than the other two sets.
+
+The neural network used for machine learning is almost arbitrarily
+chosen and has not been tuned.  The architecture is one of the
+best performing in Nicolò's experiments on other datasets from
+CosmoSim, but the hyperparameters are arbitrarily chosen.
+The training set used is 16000 images.
+
+The specification of the distribution is discussed in
+[](Dataset.ipynb) and
+can be downloaded ([dataset.toml](dataset.toml)).
 
 +++
 
@@ -49,7 +64,7 @@ This gives the neural network and hyperparameters used.
 cfg = toml.load( "ml.toml" )
 print( "CosmoSim version is", cs.__version__ )
 print( "Data from directory", cfg["output"]["directory"] )
-print( "Nerual network used:", cfg["settings"]["model"] )
+print( "Neural network used:", cfg["settings"]["model"] )
 print( json.dumps( cfg["hyperparameters"], indent=4 ) )
 ```
 
@@ -129,8 +144,8 @@ For the purpose of this test, we do not assume that we have access to the origin
 First we record the filenames.
 
 ```{code-cell} ipython3
-best = list(sse.nsmallest(3).index)
-worst = list(sse.nlargest(3).index)
+best = list(sse.nlargest(3).index)
+worst = list(sse.nsmallest(3).index)
 print( "Best:", best )
 print( "Worst:", worst )
 ```
@@ -199,7 +214,7 @@ for fn in worst:
     dfim = dfsim.getImage()
     gtsim = rg.Resim(gt.loc[fn],param=param,verbose=0)
     gtim = gtsim.getImage()
-    csimg.imageCompare( dfim, gtim, "Reconstructed", "Ground Truth" )
+    csimg.imageCompare( dfim, gtim, fn, "Ground Truth", axiscross=True )
 ```
 
 No visible discrepancy.  We can continue with the best images, obviously expecting perfect match again.
@@ -211,30 +226,6 @@ for fn in best:
     gtsim = rg.Resim(gt.loc[fn],param=param,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, "Reconstructed", "Ground Truth" )
-```
-
-## Numerical errors
-
-```{code-cell} ipython3
-gtw = gt.loc[ worst ]
-dfw = df.loc[ worst ]
-display( gtw - dfw )
-```
-
-```{code-cell} ipython3
-display( (gtw - dfw)/gtw )
-```
-
-There are some numbers that stick out as particularly large, but that's still on the order of $10^{-5}$ at worst.
-
-```{code-cell} ipython3
-gtb = gt.loc[ best ]
-dfb = df.loc[ best ]
-display( gtb - dfb )
-```
-
-```{code-cell} ipython3
-display( (gtb - dfb)/gtb )
 ```
 
 ## Simulations from Lens Parameters
@@ -258,8 +249,9 @@ way.  We need to add the row data from the dataset to the
 To avoid interference, we make a copy of `params`.
 
 ```{code-cell} ipython3
-cfg["simulator"]["config"] = "raysie"
-cfg["simulator"]["centred"] = True
+cfg["simulator"]["model"] = "Raytrace"
+cfg["simulator"]["centred"] = False
+cfg["lens"] = { "mode" : "SIE" }
 p2 = cs.Parameters( cfg )
 for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
@@ -270,9 +262,10 @@ for fn in worst:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
-This is not good, and with the small visible images, it is difficult to tell what the problem is.
-
-Finally, we can also plot the best objects with raytrace simulation.
+The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
+It is significant that the shadow in the difference image around the primary image is either black or white, never both.
+This means that the image is smaller or larger, and not rotated or awfully misshaped in general.
+Clearly, this is a limitation of the roulette formalism, since there is no difference between reconstructed and ground truth simulation.
 
 ```{code-cell} ipython3
 for fn in best:
@@ -284,9 +277,14 @@ for fn in best:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
+Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
+
++++
+
 ## Conclusion
 
 +++
 
-We see that this machine learning model make accurate prediction as far as optical perception goes.
-Other datasets may prove harder, but this dataset gives no room for further tuning.
+We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
+
+This means that there is nothing to gain from further research on machine learning models at this stage.

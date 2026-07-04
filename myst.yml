@@ -18,20 +18,17 @@ project:
     - file: index.md
     - file: Training.ipynb
     - file: SIE/index.md
-      chapters:
-      - file: SIE/index.md
-      - file: SIE/experiment001/Testing.ipynb
+      children:
       - file: SIE/Dataset.ipynb
+      - file: SIE/experiment001/Testing.ipynb
     - file: cluster2SIE/index.md
-      chapters:
-      - file: cluster2SIE/index.md
-      - file: cluster2SIE/experiment002/Testing.ipynb
+      children:
       - file: cluster2SIE/Dataset.ipynb
+      - file: cluster2SIE/experiment002/Testing.ipynb
     - file: cluster4SIS/index.md
-      chapters:
-      - file: cluster4SIS/index.md
-      - file: cluster4SIS/experiment002/Testing.ipynb
+      children:
       - file: cluster4SIS/Dataset.ipynb
+      - file: cluster4SIS/experiment003/Testing.ipynb
 site:
   template: book-theme
   # options:
