@@ -6,3 +6,6 @@ torch_cache
 .ipynb_checkpoints
 tmp
 test.*
+
+# MyST build outputs
+_build
