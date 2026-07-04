@@ -90,6 +90,26 @@ The cluser specification does not show in the row view, but we can single that o
 print( obs[1]["cluster"] )
 ```
 
+## Annotations
+
+It may be interesting to look at the Critical Curves, to get an idea of the shape of the lenses.
+Instead of `mkimg()` we make a function to get annotated images.
+
+```{code-cell} ipython3
+def mkannotation(ob):
+      p0 = Parameters( )
+      p0.setRow( ob )
+      sim = SimImage( p0, verbose=0 )
+      return sim.getAnnotated()
+```
+
+We use the same datasets as before, but generate new and annotated images.
+
+```{code-cell} ipython3
+ims = [ mkimg(ob) for ob in obs ]
+csimg.showImages( ims, size=(2,4), titles=ts )
+```
+
 ## Closure
 
 **TODO**
