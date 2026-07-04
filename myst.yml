@@ -16,7 +16,7 @@ project:
   github: https://github.com/CosmoAI-AES/experiment2026july
   toc:
     - file: index.md
-    - file: SIE/Training.ipynb
+    - file: Training.ipynb
     - file: SIE/index.md
       chapters:
       - file: SIE/index.md
