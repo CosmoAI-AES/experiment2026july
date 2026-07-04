@@ -47,11 +47,12 @@ jobs:
         run: |
           pip install -r requirements.txt --user
 
-###       - name: Set up ipykernel
-###         run: python -m ipykernel install --user --name=python3
-### 
-###       - name: Execute Notebooks 
-###         run: |
+      - name: Set up ipykernel
+        run: python -m ipykernel install --user --name=python3
+
+      - name: Execute Notebooks 
+        run: |
+          sh jupytext.sh
 ###           find demo -name "*.md" -print | grep -v index.md | grep -v README | grep -v README | grep -v checkpoints | xargs jupytext --sync --execute
 
       - name: Build HTML Assets
