@@ -42,11 +42,11 @@ with the `droulette` package.
 ```sh
 python -m droulette.split problem.toml
 ```
-The sample file is [problem.toml](./problem.toml). We can have a look at it:
+The sample file is [problem.toml](./SIE/problem.toml). We can have a look at it:
 
 ```{code-cell} ipython3
 import json, tomllib as tl
-with open( "problem.toml", 'rb') as f:
+with open( "SIE/problem.toml", 'rb') as f:
             toml = tl.load(f)
 print( json.dumps( toml, indent=4 ) )
 ```
@@ -70,7 +70,7 @@ a configuration file `ml.toml`.  The file may look like this:
 
 ```{code-cell} ipython3
 import tomllib as tl
-with open( "experiment001/ml.toml", 'rb') as f:
+with open( "SIE/experiment001/ml.toml", 'rb') as f:
             ml = tl.load(f)
 print( json.dumps( ml, indent=4 ) )
 ```

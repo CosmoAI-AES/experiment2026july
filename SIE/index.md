@@ -2,7 +2,6 @@
 # Experiment 1 (singleton SIE)
 
 + [](Dataset.ipynb)
-+ [](Training.ipynb)
 + [](experiment001/Testing.ipynb)
 + See also [](/docs/ML/Pipeline).
 
@@ -16,6 +15,8 @@ The datasets used in the demo are the following.
 
 The ground truth datasets were created from the following.
 
++ Dataset distribution: [dataset.toml](dataset.toml)
++ Problem configuration: [problem.toml](problem.toml)
 + [dataset.csv](dataset.csv) which provides the lens parameters
   for simulation and calcuation of roulette parameters.
 + [roulette.csv](roulette.csv) is the complete simulator output,
