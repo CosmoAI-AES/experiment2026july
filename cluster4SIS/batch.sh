@@ -11,13 +11,9 @@ then
   time python -m CosmoSim --toml $D/dataset.toml --rnd \
          --csvfile $D/dataset.csv --outfile $D/roulette.csv  \
          --directory $D/images -v  > $log 2> $err
-fi
 
-if test x$1 = xsetup
-then
   time python -m droulette.split $D/problem.toml
-  time python -m droulette.predownload
-fi 
+fi
 
 
 if test x$1 = xtrain
