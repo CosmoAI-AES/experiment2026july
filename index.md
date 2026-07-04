@@ -2,6 +2,16 @@
 
 These pages report on three experiments made July 2026.
 
+All the experiments follow the same general protocol.
+
++ [](Training.ipynb)
+
+::: {note} Software Versions
+The experiments are executed with CosmoSim v3.1 and droulette v0.1,
+except for the dataset generation for cluster lenses, which require
+a yet unreleased version of CosmoSim.
+:::
+
 + [](SIE/index.md)
 + [](cluster2SIE/index.md)
 + [](cluster4SIS/index.md)
