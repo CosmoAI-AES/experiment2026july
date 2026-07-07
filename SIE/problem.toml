@@ -9,12 +9,12 @@ roulette = "resimulation"
 
 [dataset.training]
 filename = "training.csv"
-size = 12000
+size = 10000
 
 [dataset.validation]
 filename = "validation.csv"
-size = 4000
+size = 3000
 
 [dataset.testing]
 filename = "testing.csv"
-size = 4000
+size = 3000

@@ -1,7 +1,7 @@
 # (C) 2026: Hans Georg Schaathun <georg@schaathun.net> 
 [simulator]
 model = "Raytrace"
-size = 20000
+size = 16000
 nterms = 4
 imagesize = 512
 cropsize = 256
