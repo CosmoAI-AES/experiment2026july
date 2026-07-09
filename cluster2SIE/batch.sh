@@ -16,7 +16,6 @@ fi
 if test x$1 = xsetup
 then
   time python -m droulette.split $D/problem.toml
-  time python -m droulette.predownload
 fi 
 
 
