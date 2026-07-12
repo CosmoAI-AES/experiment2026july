@@ -25,12 +25,12 @@ ellipseratio-max = 0.9
 mode = "SersicSphere"
 n_sersic-min = 1
 n_sersic-max = 5
-luminosity-min = 10
-luminosity-max = 20
+luminosity-min = 20
+luminosity-max = 80
 luminosity-lambda = 2.0
 # sigma (source size) 0.04"..0.2"
-sigma-min = 1
-sigma-max = 5
+sigma-min = 5
+sigma-max = 50
 position = "relative"
 
 [position]
