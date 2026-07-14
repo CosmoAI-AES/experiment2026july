@@ -10,7 +10,7 @@ then
   echo Logging to $log/$err
   time python -m CosmoSim --toml $D/dataset.toml --rnd \
          --csvfile $D/dataset.csv --outfile $D/roulette.csv  \
-         --directory $D/images -v  > $log 2> $err
+         --directory $D/images -vv  > $log 2> $err
   time python -m droulette.split $D/problem.toml
 fi 
 
