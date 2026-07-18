@@ -13,8 +13,8 @@ a yet unreleased version of CosmoSim.
 :::
 
 + [](SIE/SIE.md)
-+ [](cluster2SIE/index.md)
-+ [](cluster4SIS/index.md)
++ [](cluster2SIE/Cluster2.md)
++ [](cluster4SIS/Cluster4.md)
 
 Each experiment follows the same structure, with
 1. Dataset generation.

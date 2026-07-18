@@ -26,7 +26,7 @@ experiment%/modeltraining.log: experiment%/ml.toml $P-training.csv
 	     > $@ 2> experiment$*/modeltraining.err
 
 experiment%/eval.log: experiment%  experiment%/modeltraining.log
-	time python -m droulette.eval -o $D/eval.csv $< > $@ 2> $</eval.err
+	time python -m droulette.eval -o $</eval.csv $< > $@ 2> $</eval.err
 	echo Done $<
 
 clean:

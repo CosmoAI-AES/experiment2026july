@@ -1,0 +1,23 @@
+[problem]
+filename = "cluster4-roulette.csv"
+dataset =  "cluster4-dataset.toml"
+variables = [ "sigma", "xiX", "xiY" ]
+nterms = 4 
+
+[dataset]
+roulette = "resimulation"
+
+[dataset.training]
+filename = "cluster4-training.csv"
+predictionfile = "pred-cluster4-training.csv"
+size = 10000
+
+[dataset.validation]
+filename = "cluster4-validation.csv"
+predictionfile = "pred-cluster4-validation.csv"
+size = 1000
+
+[dataset.testing]
+filename = "cluster4-testing.csv"
+predictionfile = "pred-cluster4-testing.csv"
+size = 4000
