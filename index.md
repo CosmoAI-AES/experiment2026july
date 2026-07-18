@@ -12,7 +12,7 @@ except for the dataset generation for cluster lenses, which require
 a yet unreleased version of CosmoSim.
 :::
 
-+ [](SIE/index.md)
++ [](SIE/SIE.md)
 + [](cluster2SIE/index.md)
 + [](cluster4SIS/index.md)
 

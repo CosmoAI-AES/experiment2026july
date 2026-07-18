@@ -8,7 +8,7 @@
 [settings]
 device = "cuda"
 models = [ "regnet_y_32gf" ]
-problem = "problem.toml"
+problem = "sie-problem.toml"
 
 [hyperparameters.array]
 learning-rate = [ 1e-3 ]

@@ -24,3 +24,7 @@ experiment001: experimentbatch.toml
 experiment%/eval.log: experiment% $P-training.csv
 	time python -m droulette.eval -o $D/eval.csv $< > $@ 2> $</eval.err
 	echo Done $<
+
+clean:
+	rm -f *.csv
+	rm -rf images resimulation
