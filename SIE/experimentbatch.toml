@@ -21,9 +21,6 @@ patience = 10
 
 [dataset]
 directory = "images"
-training.filename = "training.csv"
-testing.filename = "testing.csv"
-validation.filename = "validation.csv"
 
 [output]
 dirbase = "experiment%%"

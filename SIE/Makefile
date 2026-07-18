@@ -18,7 +18,9 @@ $P-roulette.csv: $P-dataset.csv
 $P-training.csv: $P-problem.toml $P-roulette.csv
 	time python -m droulette.split $<
 
+experiment001: experimentbatch.toml
+	python -m droulette.batch $<
 
-experiment%/eval.log: experiment% training.csv
+experiment%/eval.log: experiment% $P-training.csv
 	time python -m droulette.eval -o $D/eval.csv $< > $@ 2> $</eval.err
 	echo Done $<

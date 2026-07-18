@@ -1,6 +1,6 @@
 [settings]
 device = "cuda"
-problem = "sie-problem.toml"
+problem = "problem.toml"
 model = "regnet_y_32gf"
 
 [hyperparameters]

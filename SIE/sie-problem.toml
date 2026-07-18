@@ -1,6 +1,6 @@
 [problem]
-filename = "roulette.csv"
-dataset =  "dataset.toml"
+filename = "sie-roulette.csv"
+dataset =  "sie-dataset.toml"
 variables = [ "sigma", "sigma2", "theta", "xiX", "xiY" ]
 nterms = 4 
 
