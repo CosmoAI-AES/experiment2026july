@@ -7,10 +7,13 @@ imagesize = 512
 cropsize = 256
 centred = true
 
+[dataset]
+directory = "images"
+
 [lens]
 mode = "SIS"
 # Einstein radius 0.1" .. 3.0"
-einstein-min = 20
+einstein-min = 3
 einstein-max = 75
 
 [cluster]
@@ -22,15 +25,15 @@ mode = "SersicSphere"
 n_sersic-min = 1
 n_sersic-max = 5
 luminosity-min = 20
-luminosity-max = 100
+luminosity-max = 80
 luminosity-lambda = 2.0
 # sigma (source size) 0.04"..0.2"
-sigma-min = 1
-sigma-max = 4
+sigma-min = 5
+sigma-max = 50
 position = "critical"
 
 [position]
 # (phi,r) is the source position in polar co-ordinates, angle in degrees
 phi-min = 0
 phi-max = 360
-r-relativemax = 0.4
+r-relativemax = 1.2
