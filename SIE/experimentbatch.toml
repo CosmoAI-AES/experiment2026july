@@ -1,5 +1,10 @@
 # (C) 2026: Hans Georg Schaathun <georg@schaathun.net> 
-# This configures training of a machine learning model for CosmoAI
+# This configures training of a machine learning model for CosmoAI.
+#
+# Only one experiment is generated for this project, making this file
+# redundant.  The generated file is kept as well.  It is retained as
+# an example for future experiments.
+
 [settings]
 device = "cuda"
 models = [ "regnet_y_32gf" ]

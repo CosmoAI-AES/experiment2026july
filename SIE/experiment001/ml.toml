@@ -1,6 +1,6 @@
 [settings]
 device = "cuda"
-problem = "problem.toml"
+problem = "sie-problem.toml"
 model = "regnet_y_32gf"
 
 [hyperparameters]
@@ -17,12 +17,3 @@ directory = "images"
 
 [output]
 directory = "experiment001"
-
-[dataset.training]
-filename = "training.csv"
-
-[dataset.testing]
-filename = "testing.csv"
-
-[dataset.validation]
-filename = "validation.csv"

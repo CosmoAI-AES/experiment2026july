@@ -8,13 +8,16 @@ nterms = 4
 roulette = "resimulation"
 
 [dataset.training]
-filename = "training.csv"
+filename = "sie-training.csv"
+predictionfile = "pred-sie-training.csv"
 size = 10000
 
 [dataset.validation]
-filename = "validation.csv"
+filename = "sie-validation.csv"
+predictionfile = "pred-sie-validation.csv"
 size = 1000
 
 [dataset.testing]
-filename = "testing.csv"
+filename = "sie-testing.csv"
+predictionfile = "pred-sie-testing.csv"
 size = 4000
