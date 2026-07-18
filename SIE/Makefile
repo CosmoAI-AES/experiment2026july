@@ -21,7 +21,11 @@ $P-training.csv: $P-problem.toml $P-roulette.csv
 experiment001: experimentbatch.toml
 	python -m droulette.batch $<
 
-experiment%/eval.log: experiment% $P-training.csv
+experiment%/modeltraining.log: experiment%/ml.toml $P-training.csv
+	time python -m droulette.model --config $<  \
+	     > $@ 2> experiment$*/modeltraining.err
+
+experiment%/eval.log: experiment%  experiment%/modeltraining.log
 	time python -m droulette.eval -o $D/eval.csv $< > $@ 2> $</eval.err
 	echo Done $<
 
