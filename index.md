@@ -12,7 +12,7 @@ All the experiments follow the same general protocol, with
 
 The procedure is elaborated in
 + [](Training.ipynb)
-+ Based on a general description from [](xref:cosmoai#ml-pipeline)
++ Based on a general description from [](xref:cosmoai/pipeline#ml-pipeline)
 
 ::: {note} Software Versions
 The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.
