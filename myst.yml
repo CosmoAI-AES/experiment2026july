@@ -2,7 +2,7 @@
 version: 1
 project:
   id: 0ed93a19-c9d3-4005-8456-a30a7100b18f
-  title: CosmoSim
+  title: CosmoSim Experiments July 2026
   description: |
     Test reports from machine learning on gravitational lensing.
   keywords: 
@@ -13,6 +13,8 @@ project:
       - gravitational lensing
   authors: 
     - Hans Georg Schaathun
+  references:
+    cosmoai: https://cosmoai-aes.github.io/
   github: https://github.com/CosmoAI-AES/experiment2026july
   toc:
     - file: index.md

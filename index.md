@@ -2,9 +2,9 @@
 
 These pages report on three experiments made July 2026.
 
-All the experiments follow the same general protocol.
-
+All the experiments follow the same general protocol:
 + [](Training.ipynb)
++ Based on [](xref:cosmoai#ml-pipeline)
 
 ::: {note} Software Versions
 The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.
@@ -20,5 +20,5 @@ Each experiment follows the same structure, with
 2. Training of a single machine learning model.
 3. Testing and analysis.
 
-**Home** to [](https://cosmoai-aes.github.io).
+**Home** to [](xref:cosmoai)
 

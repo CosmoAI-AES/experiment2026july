@@ -31,7 +31,7 @@ time python -m CosmoSim --toml dataset.toml --rnd \
          --csvfile dataset.csv --outfile roulette.csv  \
          --directory images 
 ```
-This is the sample data dataset configuration: [dataset.toml](./dataset.toml).
+This is the sample data dataset configuration: [SIE/sie-dataset.toml](./SIE/sie-dataset.toml).
 
 **Step 2.** Prepare the dataset for machine learning.
 
@@ -42,11 +42,11 @@ with the `droulette` package.
 ```sh
 python -m droulette.split problem.toml
 ```
-The sample file is [problem.toml](./SIE/problem.toml). We can have a look at it:
+The sample file is [sie-problem.toml](./SIE/sie-problem.toml). We can have a look at it:
 
 ```{code-cell} ipython3
 import json, tomllib as tl
-with open( "SIE/problem.toml", 'rb') as f:
+with open( "SIE/sie-problem.toml", 'rb') as f:
             toml = tl.load(f)
 print( json.dumps( toml, indent=4 ) )
 ```
