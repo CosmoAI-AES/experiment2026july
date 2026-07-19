@@ -1,5 +1,3 @@
-#!/bin/sh
-
 all: experiment003/eval.log
 
 log=datagen.log 

@@ -1,5 +1,3 @@
-#!/bin/sh
-
 all: experiment001/eval.log
 
 log=datagen.log 
@@ -21,11 +19,10 @@ $P-training.csv: $P-problem.toml $P-roulette.csv
 experiment001: experimentbatch.toml
 	python -m droulette.batch $<
 
-experiment%/modeltraining.log: experiment%/ml.toml $P-training.csv
-	time python -m droulette.model --config $<  \
-	     > $@ 2> experiment$*/modeltraining.err
+experiment%/model.pt: experiment%/ml.toml $P-training.csv
+	time python -m droulette.model --config $< 
 
-experiment%/eval.log: experiment%  experiment%/modeltraining.log
+experiment%/eval.log: experiment%  experiment%/model.pt
 	time python -m droulette.eval -o $</eval.csv $< > $@ 2> $</eval.err
 	echo Done $<
 
