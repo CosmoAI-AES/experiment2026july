@@ -1,4 +1,4 @@
-all: experiment003/eval.log
+all: experiment003/model.pt
 
 log=datagen.log 
 err=datagen.err 
@@ -16,11 +16,10 @@ $P-roulette.csv: $P-dataset.csv
 $P-training.csv: $P-problem.toml $P-roulette.csv
 	time python -m droulette.split $<
 
-experiment%/modeltraining.log: experiment%/ml.toml $P-training.csv
-	time python -m droulette.model --config $<  \
-	     > $@ 2> experiment$*/modeltraining.err
+experiment%/model.pt: experiment%/ml.toml $P-training.csv
+	time python -m droulette.model --config $< 
 
-experiment%/eval.log: experiment%  experiment%/modeltraining.log
+experiment%/eval.log: experiment%  experiment%/model.pt
 	time python -m droulette.eval -o $</eval.csv $< > $@ 2> $</eval.err
 	echo Done $<
 
