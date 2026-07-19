@@ -22,9 +22,9 @@ resimulated image.
 
 We use three datafiles, which must be downloaded if this
 document is to be executed.
-+ [testing.csv](../testing.csv) is ground truth for model training
-+ [test.csv](test.csv) is the predicted amplitudes from machine learning.
-+ [dataset.csv](../dataset.csv) is the original lens parameters used to generate
++ [cluster4-testing.csv](../cluster4-testing.csv) is ground truth for model training
++ [pred-cluster4-testing.csv](pred-cluster4-testing.csv) is the predicted amplitudes from machine learning.
++ [cluster4-dataset.csv](../cluster4-dataset.csv) is the original lens parameters used to generate
   the training, testing, and validation data, i.e. it has more
   rows than the other two sets.
 
@@ -35,8 +35,8 @@ CosmoSim, but the hyperparameters are arbitrarily chosen.
 The training set used is 16000 images.
 
 The specification of the distribution is discussed in
-[](Dataset.ipynb) and
-can be downloaded ([dataset.toml](dataset.toml)).
+[](../Dataset.ipynb) and
+can be downloaded ([cluster4-dataset.toml](cluster4-dataset.toml)).
 
 +++
 
@@ -71,8 +71,8 @@ print( json.dumps( cfg["hyperparameters"], indent=4 ) )
 Let's load the test set, both the ground truth (`gt`) and the predictions (`df`).
 
 ```{code-cell} ipython3
-gt = pd.read_csv( "../testing.csv", index_col="filename" )
-df = pd.read_csv( "test.csv", index_col="filename" )
+gt = pd.read_csv( "../cluster4-testing.csv", index_col="filename" )
+df = pd.read_csv( "pred-cluster4-testing.csv", index_col="filename" )
 display( gt.head() )
 display( df.head() )
 ```
@@ -234,7 +234,7 @@ We can also load the original lens parameters, from which
 the ground truth was computed.
 
 ```{code-cell} ipython3
-orig = pd.read_csv( "../dataset.csv", index_col="filename" )
+orig = pd.read_csv( "../cluster4-dataset.csv", index_col="filename" )
 display( orig.head() )
 ```
 

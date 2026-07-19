@@ -13,7 +13,7 @@ kernelspec:
   language: python
 ---
 
-# Cluster Lenses (Demo n° 2)
+# Cluster Dataset (2x SIE)
 
 In this demo we show the generation of a dataset for machine
 learning sporting two SIE lenses.
@@ -44,7 +44,7 @@ from CosmoSim import Parameters
 The distribution of the dataset is configured as follows.
 
 ```{code-cell} ipython3
-cfg = csd.readtoml( "dataset.toml" )
+cfg = csd.readtoml( "cluster2-dataset.toml" )
 display( json.dumps( cfg ) )
 ```
 
