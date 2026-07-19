@@ -17,15 +17,15 @@ project:
   toc:
     - file: index.md
     - file: Training.ipynb
-    - file: SIE/index.md
+    - file: SIE/SIE.md
       children:
       - file: SIE/Dataset.ipynb
       - file: SIE/experiment001/Testing.ipynb
-    - file: cluster2SIE/index.md
+    - file: cluster2SIE/Cluster2.md
       children:
       - file: cluster2SIE/Dataset.ipynb
       - file: cluster2SIE/experiment002/Testing.ipynb
-    - file: cluster4SIS/index.md
+    - file: cluster4SIS/Cluster4.md
       children:
       - file: cluster4SIS/Dataset.ipynb
       - file: cluster4SIS/experiment003/Testing.ipynb

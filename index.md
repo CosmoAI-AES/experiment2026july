@@ -7,9 +7,8 @@ All the experiments follow the same general protocol.
 + [](Training.ipynb)
 
 ::: {note} Software Versions
-The experiments are executed with CosmoSim v3.1 and droulette v0.1,
-except for the dataset generation for cluster lenses, which require
-a yet unreleased version of CosmoSim.
+The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.
+Earlier versions will not work, for various reasons.
 :::
 
 + [](SIE/SIE.md)

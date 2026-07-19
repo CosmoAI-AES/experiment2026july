@@ -8,9 +8,9 @@ The datasets used in the demo are the following.
 
 | Datasets | Ground Truth | Prediction |
 | :-       | :-           | :-         |
-| Training  | [training.csv](training.csv) | [train.csv](experiment002/train.csv) |
-| Validation  | [validation.csv](validation.csv) | [val.csv](experiment002/val.csv) |
-| Testing  | [testing.csv](testing.csv) | [test.csv](experiment002/test.csv) |
+| Training  | [training.csv](training.csv) | [training.csv](experiment002/training.csv) |
+| Validation  | [validation.csv](validation.csv) | [validation.csv](experiment002/validation.csv) |
+| Testing  | [testing.csv](testing.csv) | [testing.csv](experiment002/testing.csv) |
 
 The ground truth datasets were created from the following.
 

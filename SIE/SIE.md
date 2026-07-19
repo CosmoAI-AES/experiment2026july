@@ -8,9 +8,9 @@ The datasets used in the demo are the following.
 
 | Datasets | Ground Truth | Prediction |
 | :-       | :-           | :-         |
-| Training  | [sie-training.csv](sie-training.csv) | [pred-sie-train.csv](experiment001/pred-sie-train.csv) |
-| Validation  | [sie-validation.csv](sie-validation.csv) | [pred-sie-val.csv](experiment001/pred-sie-val.csv) |
-| Testing  | [sie-testing.csv](sie-testing.csv) | [pred-sie-test.csv](experiment001/pred-sie-test.csv) |
+| Training  | [sie-training.csv](sie-training.csv) | [pred-sie-training.csv](experiment001/pred-sie-training.csv) |
+| Validation  | [sie-validation.csv](sie-validation.csv) | [pred-sie-validation.csv](experiment001/pred-sie-validation.csv) |
+| Testing  | [sie-testing.csv](sie-testing.csv) | [pred-sie-testing.csv](experiment001/pred-sie-testing.csv) |
 
 The ground truth datasets were created from the following.
 

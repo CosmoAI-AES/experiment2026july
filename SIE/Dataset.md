@@ -13,7 +13,7 @@ kernelspec:
   language: python
 ---
 
-# Sample Datasets
+# Sample Datasets for SIE
 
 The purpose of this demonstration is to explore reasonable parameters
 for dataset generation.
@@ -105,7 +105,7 @@ However, the `dataset` submodule does not use the `Parameters` class for
 its parameters at present.
 
 ```{code-cell} ipython3
-cfg = csd.readtoml( "dataset.toml" )
+cfg = csd.readtoml( "sie-dataset.toml" )
 display( cfg )
 ```
 
@@ -116,7 +116,7 @@ As of CosmoSim v3.1 we can still use the config parameter for both the simulatio
 This will change in v3.2, to require separate settings for `simulator.model` and `lens.mode`.
 
 ::: {tip}
-Download [dataset.toml](./dataset.toml).
+Download [sie-dataset.toml](./sie-dataset.toml).
 :::
 
 ::: {note} Remark
