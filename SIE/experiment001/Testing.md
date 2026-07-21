@@ -140,7 +140,9 @@ sse.nsmallest(3)
 ```
 
 We note that the errors are small, but there is also a huge span between the best and the worst.
-For the purpose of this test, we do not assume that we have access to the original images, but we can resimulate them from the roulette amplitudes.
+For the purpose of this test, we do not assume that we have access
+to the original images, but we do have access to the lens parameters
+so that we can regenerate the images.
 First we record the filenames.
 
 ```{code-cell} ipython3
