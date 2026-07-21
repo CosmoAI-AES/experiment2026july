@@ -17,7 +17,7 @@ The ground truth datasets were created from the following.
 + Dataset distribution: [cluster2-dataset.toml](cluster2-dataset.toml)
 + Problem configuration: [cluster2-problem.toml](cluster2-problem.toml)
 + [cluster2-dataset.csv](cluster2-dataset.csv) which provides the lens parameters
-  for simulation and calcuation of roulette parameters.
+  for simulation and calculation of roulette parameters.
 + [cluster2-roulette.csv](cluster2-roulette.csv) is the complete simulator output,
   including some columns ommitted in the data for machine learning.
 

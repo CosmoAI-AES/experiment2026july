@@ -23,7 +23,7 @@ here, I will outline the process as I have used it.
 This demo requires CosmoSim v3.1 and droulette v0.1.
 
 **Step 1.** Generate a dataset
-This is discussed in detail in [](Dataset.ipynb).
+This is discussed in detail in [](SIE/Dataset.ipynb).
 
 A typical command looks like this:
 ```sh

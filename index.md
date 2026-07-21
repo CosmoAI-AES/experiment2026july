@@ -5,14 +5,13 @@ These pages report on three experiments made July 2026.
 + [](cluster2SIE/Cluster2.md)
 + [](cluster4SIS/Cluster4.md)
 
-All the experiments follow the same general protocol, with
+All the experiments follow the same general protocol, elaborate
+in [](Training.ipynb), with the following steps.
 1. Dataset generation.
 2. Training of a single machine learning model.
 3. Testing and analysis.
 
-The procedure is elaborated in
-+ [](Training.ipynb)
-+ Based on a general description from [](xref:cosmoai/pipeline#ml-pipeline)
+This is based on the general [](xref:cosmoai/pipeline#ml-pipeline).
 
 ::: {note} Software Versions
 The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.

@@ -17,7 +17,7 @@ The ground truth datasets were created from the following.
 + Dataset distribution: [sie-dataset.toml](sie-dataset.toml)
 + Problem configuration: [sie-problem.toml](sie-problem.toml)
 + [sie-dataset.csv](sie-dataset.csv) which provides the lens parameters
-  for simulation and calcuation of roulette parameters.
+  for simulation and calculation of roulette parameters.
 + [sie-roulette.csv](sie-roulette.csv) is the complete simulator output,
   including some columns ommitted in the data for machine learning.
 

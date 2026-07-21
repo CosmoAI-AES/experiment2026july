@@ -13,7 +13,7 @@ kernelspec:
   name: python3
 ---
 
-# Evaluation on the test set
+# Evaluation of machine learning for SIE
 
 This document evaluates one trained machine learning model,
 see details below.
