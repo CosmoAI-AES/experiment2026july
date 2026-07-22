@@ -23,6 +23,7 @@ project:
       children:
       - file: SIE/Dataset.ipynb
       - file: SIE/experiment001/Testing.ipynb
+      - file: SIE/experiment001/Resimulation.ipynb
     - file: cluster2SIE/Cluster2.md
       children:
       - file: cluster2SIE/Dataset.ipynb
@@ -31,7 +32,6 @@ project:
       children:
       - file: cluster4SIS/Dataset.ipynb
       - file: cluster4SIS/experiment003/Testing.ipynb
-    - file: Resimulation.md
 site:
   template: book-theme
   # options:
