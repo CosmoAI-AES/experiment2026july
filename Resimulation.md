@@ -103,7 +103,7 @@ for index, row in df.iterrows():
     param["simulator"]["model"] = "Roulette" 
     rou = SimImage( param, verbose=0
         ).getAnnotated(centrePoint=None)
-    csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+    csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
 ```
 
 Here we observe very good match between the roulette and raytrace simulations, except

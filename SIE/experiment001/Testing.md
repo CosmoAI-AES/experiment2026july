@@ -229,7 +229,7 @@ for fn in best:
     dfim = dfsim.getImage()
     gtsim = rg.Resim(gt.loc[fn],param=param,verbose=0)
     gtim = gtsim.getImage()
-    csimg.imageCompare( dfim, gtim, "Reconstructed", "Ground Truth" )
+    csimg.imageCompare( dfim, gtim, fn, "Ground Truth" )
 ```
 
 ## Simulations from Lens Parameters
@@ -302,4 +302,3 @@ for fn in best:
 We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
 
 This means that there is nothing to gain from further research on machine learning models at this stage.
-
