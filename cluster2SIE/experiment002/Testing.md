@@ -36,7 +36,7 @@ The training set used is 16000 images.
 
 The specification of the distribution is discussed in
 [](../Dataset.ipynb) and
-can be downloaded ([cluster2-dataset.toml](../cluster2-dataset.toml)).
+can be downloaded ([cluster2-dataset.toml](cluster2-dataset.toml)).
 
 +++
 
@@ -250,7 +250,7 @@ To avoid interference, we make a copy of `params`.
 
 ```{code-cell} ipython3
 cfg["simulator"]["model"] = "Raytrace"
-cfg["simulator"]["centred"] = False
+cfg["simulator"]["centred"] = True
 cfg["lens"] = { "mode" : "SIE" }
 p2 = cs.Parameters( cfg )
 for fn in worst:

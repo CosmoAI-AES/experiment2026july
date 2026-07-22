@@ -261,6 +261,7 @@ for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
     dfim = dfsim.getImage()
     p2.setRow( orig.loc[fn] )
+    print( p2.get( "centred" ) )
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
@@ -283,7 +284,15 @@ for fn in best:
 
 Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
 
-+++
+Finally, it may be useful to see the critical curves and convergence rings.
+
+```{code-cell} ipython3
+for fn in best:
+    dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
+    p2.setRow( orig.loc[fn] )
+    gtim = dg.SimImage(param=p2,verbose=0).getImage()
+    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+```
 
 ## Conclusion
 
