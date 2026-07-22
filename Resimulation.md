@@ -35,6 +35,7 @@ print( "CosmoSim version", cs.__version__ )
 ## Review of the SIE experiment data
 
 Files used:
++ [SIE/sie-dataset.toml](./SIE/sie-dataset.toml).
 + [SIE/sie-dataset.csv](./SIE/sie-dataset.csv).
 + [SIE/sie-testing.csv](./SIE/sie-testing.csv).
 + [SIE/pred-sie-testing.csv](./SIE/experiment001/pred-sie-testing.csv).
@@ -119,6 +120,10 @@ First a simple check with a single data point.
 
 ```{code-cell} ipython3
 row = imsim0.getData()
+display( row )
+```
+
+```{code-cell} ipython3
 rp = Parameters( { "simulator" : { "cropsize" : 256 } } )
 resimImage = Resim(  row, rp, verbose=0 ).getImage()
 csimg.imageCompare( resimImage, rou0, "Resimulation", "Original Roulette" )
