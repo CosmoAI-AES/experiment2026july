@@ -35,16 +35,16 @@ print( "CosmoSim version", cs.__version__ )
 ## Review of the SIE experiment data
 
 Files used:
-+ [SIE/sie-dataset.toml](./SIE/sie-dataset.toml).
-+ [SIE/sie-dataset.csv](./SIE/sie-dataset.csv).
-+ [SIE/sie-testing.csv](./SIE/sie-testing.csv).
-+ [SIE/pred-sie-testing.csv](./SIE/experiment001/pred-sie-testing.csv).
++ [sie-dataset.toml](../sie-dataset.toml).
++ [sie-dataset.csv](../sie-dataset.csv).
++ [sie-testing.csv](../sie-testing.csv).
++ [pred-sie-testing.csv](./experiment001/pred-sie-testing.csv).
 
 We load and compare the testing results and the ground truth.
 
 ```{code-cell} ipython3
-gt = pd.read_csv( "SIE/sie-testing.csv", index_col="filename" )
-pr = pd.read_csv( "SIE/experiment001/pred-sie-testing.csv", index_col="filename" )
+gt = pd.read_csv( "../sie-testing.csv", index_col="filename" )
+pr = pd.read_csv( "pred-sie-testing.csv", index_col="filename" )
 rawerrors = gt - pr
 sse = (rawerrors**2).sum(axis=1)
 ```
@@ -62,13 +62,13 @@ We load the lens parameters and pick the rows corresponding to these
 best and worst images.
 
 ```{code-cell} ipython3
-df = pd.read_csv( "SIE/sie-dataset.csv", index_col="filename" )
+df = pd.read_csv( "../sie-dataset.csv", index_col="filename" )
 df = df.loc[best+worst]
 display( df )
 ```
 
 ```{code-cell} ipython3
-with open( "SIE/sie-dataset.toml", 'rb' ) as f:
+with open( "../sie-dataset.toml", 'rb' ) as f:
             toml = tl.load(f)
 param = Parameters( toml )
 ```
@@ -156,7 +156,7 @@ print( "Centring:", param.get( "centred" ) )
 Let us reset the simulator to use centred mode.
 
 ```{code-cell} ipython3
-with open( "SIE/sie-dataset.toml", 'rb' ) as f:
+with open( "../sie-dataset.toml", 'rb' ) as f:
             toml = tl.load(f)
 param = Parameters( toml )
 ```
@@ -169,6 +169,32 @@ for index, row in df.iterrows():
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+```
+
+## Validation of the generated amplitudes
+
+```{code-cell} ipython3
+gt = pd.read_csv( "../sie-roulette.csv", index_col="filename" )
+display( gt.head() )
+```
+
+```{code-cell} ipython3
+l = []
+for index, row in df.iterrows():
+    param.setRow( row )
+    imsim = SimImage( param, verbose=0 )
+    l.append( imsim.getData() )
+gen = pd.DataFrame( l )
+display( gen )
+```
+
+```{code-cell} ipython3
+diff = gen.drop("source",axis=1)-gt.loc[best+worst]
+display( diff )
+```
+
+```{code-cell} ipython3
+display( diff.abs().max() )
 ```
 
 ## Closure
