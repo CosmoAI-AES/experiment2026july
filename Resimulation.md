@@ -75,8 +75,8 @@ param = Parameters( toml )
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
 param["simulator"]["centred"] = False
-imsim = SimImage( param, verbose=0 )
-ray0 = imsim.getImage()
+imsim0 = SimImage( param, verbose=0 )
+ray0 = imsim0.getImage()
 param["simulator"]["model"] = "Roulette" 
 rou0 = SimImage( param, verbose=0 ).getImage()
 csimg.imageCompare( ray0, rou0, "Raytrace", "Roulette" ) 
@@ -93,7 +93,6 @@ csimg.imageCompare( ray, rou, "Raytrace", "Roulette" )
 
 ## The full image set
 
-
 ```{code-cell} ipython3
 for index, row in df.iterrows():
     param.setRow( row )
@@ -106,25 +105,39 @@ for index, row in df.iterrows():
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
 ```
 
+Here we observe very good match between the roulette and raytrace simulations, except
+possibly where the visible image is tiny and centred, where it is difficult to judge.
+
++++
+
 ## Resimulation
 
++++
+
+It will be interesting to check if resimulation confirms the result.
+First a simple check with a single data point.
+
 ```{code-cell} ipython3
-df2 = gt.iloc[best+worst]
-row = imsim.getData()
-resimImage = Resim(  row, param, verbose=0 ).getImage()
-csimg.imageCompare( resimImage, rou0, "Resimulation", "Original Roulettte" )
+row = imsim0.getData()
+rp = Parameters( { "simulator" : { "cropsize" : 256 } } )
+resimImage = Resim(  row, rp, verbose=0 ).getImage()
+csimg.imageCompare( resimImage, rou0, "Resimulation", "Original Roulette" )
+csimg.imageCompare( resimImage, ray0, "Resimulation", "Original Raytrace" )
 ```
+
+We see a small discrepancy in the primary image. This may or may not be significant in itself, but it is disconserting because the original roulette simulation was perfect.
+
+The other images show similar discrepancies.
 
 ```{code-cell} ipython3
 for index, row in df.iterrows():
     param.setRow( row )
     param["simulator"]["centred"] = False
     imsim = SimImage( param, verbose=0 )
-    ray = imsim.getAnnotated(centrePoint=None)
+    ray = imsim.getImage()
     param["simulator"]["model"] = "Roulette" 
     rr = imsim.getData()
-    rou = Resim( rr, param, verbose=0
-        ).getAnnotated(centrePoint=None)
+    rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
 ```
 
@@ -133,7 +146,3 @@ for index, row in df.iterrows():
 This comparison shows good match between raytrace and roulette, except possibly for small images close to the origin.
 
 What is confusing in these images is that the spurious images appear to be off compared to the convergence ring.  It is possible that the definition we use for the convergence ring may only be valid for symmetric (spherical) lenses.
-
-```{code-cell} ipython3
-
-```

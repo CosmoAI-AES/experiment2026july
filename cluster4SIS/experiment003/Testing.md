@@ -257,6 +257,7 @@ for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
     dfim = dfsim.getImage()
     p2.setRow( orig.loc[fn] )
+    p2["simulator"]["centred"] = True
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )

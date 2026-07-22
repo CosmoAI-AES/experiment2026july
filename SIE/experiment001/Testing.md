@@ -261,6 +261,7 @@ for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
     dfim = dfsim.getImage()
     p2.setRow( orig.loc[fn] )
+    p2["simulator"]["centred"] = True
     print( p2.get( "centred" ) )
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
@@ -301,3 +302,4 @@ for fn in best:
 We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
 
 This means that there is nothing to gain from further research on machine learning models at this stage.
+
