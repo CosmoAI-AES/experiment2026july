@@ -36,7 +36,7 @@ The training set used is 16000 images.
 
 The specification of the distribution is discussed in
 [](../Dataset.ipynb) and
-can be downloaded ([cluster4-dataset.toml](cluster4-dataset.toml)).
+can be downloaded ([cluster4-dataset.toml](../cluster4-dataset.toml)).
 
 +++
 

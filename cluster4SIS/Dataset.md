@@ -8,23 +8,21 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.19.4
 kernelspec:
-  name: python3
   display_name: Python 3 (ipykernel)
   language: python
+  name: python3
 ---
 
 # Cluster Dataset (4x SIS)
 
 In this demo we show the generation of a dataset for machine
 learning sporting two SIE lenses.
+To run the notebook, you will have to download several datafiles
+from [](Cluster4.md).
 
 ::: {warning} 
 This demo uses a feature from CosmoSim v3.2, taking the Critical Curve
 into account when placing the sources.  This will not work in v3.1.
-:::
-
-::: {warning}
-Work in progress
 :::
 
 ## Preparation
@@ -90,6 +88,33 @@ The cluser specification does not show in the row view, but we can single that o
 print( obs[1]["cluster"] )
 ```
 
+## Annotations
+
+It may be interesting to look at the Critical Curves, to get an idea of the shape of the lenses.
+Instead of `mkimg()` we make a function to get annotated images.
+
+```{code-cell} ipython3
+def mkannotation(ob):
+      p0 = Parameters( )
+      p0.setRow( ob )
+      sim = SimImage( p0, verbose=0 )
+      return sim.getAnnotated()
+```
+
+We use the same datasets as before, but generate new and annotated images.
+
+```{code-cell} ipython3
+ims = [ mkimg(ob) for ob in obs ]
+csimg.showImages( ims, size=(2,4), titles=ts )
+```
+
+The yellow curve is the Critical Curve, and the blue circle is the convergence
+ring of the roulette formalism.
+The red point is the centre of light.
+
 ## Closure
 
-**TODO**
+We have attemmpted to design the dataset so that it displays interesting
+samples of strong lensing.  
+More research is needed on actual distributions of observed lenses, and
+how a representative sample can be designed for machine learning.

@@ -157,7 +157,9 @@ print( "Worst:", worst )
 Before we can simulate, we need to set up some basic parameters.
 
 ```{code-cell} ipython3
-cfg = { "simulator" : { "imagesize" : 512, "cropsize" : 256, "xireference" : True }
+cfg = { "simulator" : { "imagesize" : 512
+                      , "cropsize" : 256
+                      , "xireference" : True }
       , "source" : { "mode" : "SersicSphere" } }
 param = cs.Parameters( cfg )
 ```

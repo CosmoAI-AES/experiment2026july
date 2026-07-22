@@ -8,9 +8,9 @@ The datasets used in the demo are the following.
 
 | Datasets | Ground Truth | Prediction |
 | :-       | :-           | :-         |
-| Training  | [training.csv](training.csv) | [cluster2-training.csv](experiment002/cluster2-training.csv) |
-| Validation  | [validation.csv](validation.csv) | [cluster2-validation.csv](experiment002/cluster2-validation.csv) |
-| Testing  | [testing.csv](testing.csv) | [cluster2-testing.csv](experiment002/cluster2-testing.csv) |
+| Training  | [cluster2-training.csv](cluster2-training.csv) | [pred-cluster2-training.csv](experiment002/pred-cluster2-training.csv) |
+| Validation  | [cluster2-validation.csv](cluster2-validation.csv) | [pred-cluster2-validation.csv](experiment002/pred-cluster2-validation.csv) |
+| Testing  | [cluster2-testing.csv](cluster2-testing.csv) | [pred-cluster2-testing.csv](experiment002/pred-cluster2-testing.csv) |
 
 The ground truth datasets were created from the following.
 
