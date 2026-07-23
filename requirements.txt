@@ -1,5 +1,5 @@
-droulette>=0.2.0
-CosmoSim>=3.2.4
+droulette>=0.2.1
+CosmoSim>=3.3
 numpy 
 matplotlib
 opencv-python
