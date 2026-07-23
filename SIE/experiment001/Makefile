@@ -1,4 +1,4 @@
-ipynb: Testing.ipynb Resimulation.ipynb Resimulation02.ipynb
+ipynb: Testing.ipynb Resimulation.ipynb 
 
 J=jupytext --execute -w --to ipynb
 

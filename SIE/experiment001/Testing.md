@@ -55,6 +55,7 @@ import CosmoSim as cs
 import CosmoSim.datagen as dg
 import CosmoSim.roulettegen as rg
 imshow = csimg.imshow
+print( "CosmoSim version", cs.__version__ )
 ```
 
 Let us check the parameters underlying this test.
