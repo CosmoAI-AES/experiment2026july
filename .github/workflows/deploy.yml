@@ -52,7 +52,7 @@ jobs:
 
       - name: Execute Notebooks 
         run: |
-          sh jupytext.sh
+          make ipynb
 ###           find demo -name "*.md" -print | grep -v index.md | grep -v README | grep -v README | grep -v checkpoints | xargs jupytext --sync --execute
 
       - name: Build HTML Assets

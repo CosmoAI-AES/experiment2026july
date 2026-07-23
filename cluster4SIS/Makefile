@@ -28,7 +28,7 @@ clean:
 	rm -rf images resimulation
 
 ipynb: Dataset.ipynb
-	cd experiment003 ; $(MAKE) $@
+	cd experiment003 && $(MAKE) $@
 J=jupytext --execute -w --to ipynb
 
 %.ipynb: %.md
