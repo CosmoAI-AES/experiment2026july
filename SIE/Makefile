@@ -29,3 +29,10 @@ experiment%/eval.log: experiment%  experiment%/model.pt
 clean:
 	rm -f *.csv
 	rm -rf images resimulation
+
+ipynb: Dataset.ipynb
+	cd experiment001 ; $(MAKE) $@
+J=jupytext --execute -w --to ipynb
+
+%.ipynb: %.md
+	$J "$<"
