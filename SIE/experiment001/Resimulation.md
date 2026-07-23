@@ -33,9 +33,12 @@ import CosmoSim as cs
 print( "CosmoSim version", cs.__version__ )
 ```
 
-This test uses the features available in CosmoSim v3.2.4.
-We make a separate to make tests enabled by future, unreleased
-versions: [](Resimulation02.ipynb).
+::: {warning} Version requirement
+This report assumes the features introduced in CosmoSim v3.3.
+Using v3.2.4, the code will run, but the discrepnacies reported
+in the last test will also be present in the previous tests
+using the `Resim` class.
+:::
 
 We will also need the following files, which will be loaded by 
 the code:
