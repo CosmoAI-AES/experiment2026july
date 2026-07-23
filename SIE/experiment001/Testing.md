@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.3
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -302,3 +302,9 @@ for fn in best:
 We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
 
 This means that there is nothing to gain from further research on machine learning models at this stage.
+
+::: {note} The roulette formalism
+The discrepnacy in resimulation is not present in original roulette
+simulaion.
+We explore this in a separate test of [](Resimulation.ipynb).
+:::

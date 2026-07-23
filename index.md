@@ -18,13 +18,6 @@ The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.
 Earlier versions will not work, for various reasons.
 :::
 
-::: {note} The roulette formalism
-There are some disconcerting errors in the roulette resimulations.
-We have made a separate test of the [](Resimulation.ipynb),
-showing that the resimulation does not perfectly match the
-original roulette simulation.
-The reason for this is a subject for further research.
-:::
 
 **Home** to [](xref:cosmoai)
 

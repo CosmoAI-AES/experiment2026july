@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.3
 kernelspec:
   name: python3
   display_name: Python 3 (ipykernel)
@@ -35,16 +35,16 @@ print( "CosmoSim version", cs.__version__ )
 ## Review of the SIE experiment data
 
 Files used:
-+ [SIE/sie-dataset.toml](./SIE/sie-dataset.toml).
-+ [SIE/sie-dataset.csv](./SIE/sie-dataset.csv).
-+ [SIE/sie-testing.csv](./SIE/sie-testing.csv).
-+ [SIE/pred-sie-testing.csv](./SIE/experiment001/pred-sie-testing.csv).
++ [sie-dataset.toml](../sie-dataset.toml).
++ [sie-dataset.csv](../sie-dataset.csv).
++ [sie-testing.csv](../sie-testing.csv).
++ [pred-sie-testing.csv](./experiment001/pred-sie-testing.csv).
 
 We load and compare the testing results and the ground truth.
 
 ```{code-cell} ipython3
-gt = pd.read_csv( "SIE/sie-testing.csv", index_col="filename" )
-pr = pd.read_csv( "SIE/experiment001/pred-sie-testing.csv", index_col="filename" )
+gt = pd.read_csv( "../sie-testing.csv", index_col="filename" )
+pr = pd.read_csv( "pred-sie-testing.csv", index_col="filename" )
 rawerrors = gt - pr
 sse = (rawerrors**2).sum(axis=1)
 ```
@@ -62,13 +62,13 @@ We load the lens parameters and pick the rows corresponding to these
 best and worst images.
 
 ```{code-cell} ipython3
-df = pd.read_csv( "SIE/sie-dataset.csv", index_col="filename" )
+df = pd.read_csv( "../sie-dataset.csv", index_col="filename" )
 df = df.loc[best+worst]
 display( df )
 ```
 
 ```{code-cell} ipython3
-with open( "SIE/sie-dataset.toml", 'rb' ) as f:
+with open( "../sie-dataset.toml", 'rb' ) as f:
             toml = tl.load(f)
 param = Parameters( toml )
 ```
@@ -132,7 +132,7 @@ csimg.imageCompare( resimImage, ray0, "Resimulation", "Original Raytrace" )
 
 We see a small discrepancy in the primary image. This may or may not be significant in itself, but it is disconserting because the original roulette simulation was perfect.
 
-The other images show similar discrepancies.
+Most of the other images show similar discrepancies, but some are also alright.
 
 ```{code-cell} ipython3
 for index, row in df.iterrows():
@@ -140,10 +140,61 @@ for index, row in df.iterrows():
     param["simulator"]["centred"] = False
     imsim = SimImage( param, verbose=0 )
     ray = imsim.getImage()
-    param["simulator"]["model"] = "Roulette" 
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+```
+
+Note that we have simulated without centring.
+
+```{code-cell} ipython3
+print( "Centring:", param.get( "centred" ) )
+```
+
+## Centred mode
+
+Let us reset the simulator to use centred mode.
+
+```{code-cell} ipython3
+with open( "../sie-dataset.toml", 'rb' ) as f:
+            toml = tl.load(f)
+param = Parameters( toml )
+```
+
+```{code-cell} ipython3
+for index, row in df.iterrows():
+    param.setRow( row )
+    imsim = SimImage( param, verbose=0 )
+    ray = imsim.getImage()
+    rr = imsim.getData()
+    rou = Resim( rr, rp, verbose=0 ).getImage()
+    csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+```
+
+## Validation of the generated amplitudes
+
+```{code-cell} ipython3
+gt = pd.read_csv( "../sie-roulette.csv", index_col="filename" )
+display( gt.head() )
+```
+
+```{code-cell} ipython3
+l = []
+for index, row in df.iterrows():
+    param.setRow( row )
+    imsim = SimImage( param, verbose=0 )
+    l.append( imsim.getData() )
+gen = pd.DataFrame( l )
+display( gen )
+```
+
+```{code-cell} ipython3
+diff = gen.drop("source",axis=1)-gt.loc[best+worst]
+display( diff )
+```
+
+```{code-cell} ipython3
+display( diff.abs().max() )
 ```
 
 ## Closure
@@ -151,3 +202,7 @@ for index, row in df.iterrows():
 This comparison shows good match between raytrace and roulette, except possibly for small images close to the origin.
 
 What is confusing in these images is that the spurious images appear to be off compared to the convergence ring.  It is possible that the definition we use for the convergence ring may only be valid for symmetric (spherical) lenses.
+
+```{code-cell} ipython3
+
+```

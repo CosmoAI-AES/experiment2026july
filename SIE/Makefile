@@ -5,6 +5,8 @@ err=datagen.err
 
 P=sie
 
+data: $P-training.csv $P-testing.toml $P-validation.csv
+
 $P-dataset.csv: $P-dataset.toml 
 	time python -m CosmoSim.dataset $< $@ 
 
@@ -15,6 +17,9 @@ $P-roulette.csv: $P-dataset.csv
 
 $P-training.csv: $P-problem.toml $P-roulette.csv
 	time python -m droulette.split $<
+
+%-testing.csv: %-training.csv
+%-validation.csv: %-training.csv 
 
 experiment001: experimentbatch.toml
 	python -m droulette.batch $<
