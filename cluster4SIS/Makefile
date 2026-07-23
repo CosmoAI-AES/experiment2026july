@@ -1,4 +1,4 @@
-all: experiment003/model.pt
+all: experiment003/model.pth
 
 log=datagen.log 
 err=datagen.err 
@@ -16,7 +16,7 @@ $P-roulette.csv: $P-dataset.csv
 $P-training.csv: $P-problem.toml $P-roulette.csv
 	time python -m droulette.split $<
 
-experiment%/model.pt: experiment%/ml.toml $P-training.csv
+experiment%/model.pth: experiment%/ml.toml $P-training.csv
 	time python -m droulette.model --config $< 
 
 experiment%/eval.log: experiment%  experiment%/model.pt

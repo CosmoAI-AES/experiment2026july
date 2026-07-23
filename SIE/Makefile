@@ -24,7 +24,7 @@ $P-training.csv: $P-problem.toml $P-roulette.csv
 experiment001: experimentbatch.toml
 	python -m droulette.batch $<
 
-experiment%/model.pt: experiment%/ml.toml $P-training.csv
+experiment%/model.pth: experiment%/ml.toml $P-training.csv
 	time python -m droulette.model --config $< 
 
 experiment%/eval.log: experiment%  experiment%/model.pt
