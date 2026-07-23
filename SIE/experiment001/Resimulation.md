@@ -11,11 +11,16 @@ kernelspec:
   name: python3
   display_name: Python 3 (ipykernel)
   language: python
+exports:
+  - format: pdf
+    template: lapreprint
+
 ---
 
 # Roulette Simulation (Experiment July 2026)
 
-We build on [](xref:cosmoai/demo/Demo03Resimulation.ipynb).
+We build on [](xref:cosmoai/demo03resimulation/).
+The following modules are needed.
 
 ```{code-cell} ipython3
 import pandas as pd
@@ -32,13 +37,14 @@ import CosmoSim as cs
 print( "CosmoSim version", cs.__version__ )
 ```
 
-## Review of the SIE experiment data
-
-Files used:
+We will also need the following files, which will be loaded by 
+the code:
 + [sie-dataset.toml](../sie-dataset.toml).
 + [sie-dataset.csv](../sie-dataset.csv).
 + [sie-testing.csv](../sie-testing.csv).
 + [pred-sie-testing.csv](./experiment001/pred-sie-testing.csv).
+
+## Review of the SIE experiment data
 
 We load and compare the testing results and the ground truth.
 
@@ -54,12 +60,15 @@ From the dataset, we pick the three best and the three worst data points.
 ```{code-cell} ipython3
 best = list(sse.nlargest(3).index)
 worst = list(sse.nsmallest(3).index)
-print( best )
-print( worst )
+print( "Best:", best )
+print( "Worst:", worst )
 ```
 
-We load the lens parameters and pick the rows corresponding to these
-best and worst images.
+## Simulation from lens parameters
+
+To simulate the images, we need to load the parameters from
+`sie-dataset.csv`.
+From this dataset we pick just the selected rows.
 
 ```{code-cell} ipython3
 df = pd.read_csv( "../sie-dataset.csv", index_col="filename" )
@@ -67,11 +76,15 @@ df = df.loc[best+worst]
 display( df )
 ```
 
+We will also need the simulator configuration from `sie-dataset.toml`.
+
 ```{code-cell} ipython3
 with open( "../sie-dataset.toml", 'rb' ) as f:
             toml = tl.load(f)
 param = Parameters( toml )
 ```
+
+Now we can run the simulator.
 
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
@@ -79,20 +92,36 @@ param["simulator"]["centred"] = False
 imsim0 = SimImage( param, verbose=0 )
 ray0 = imsim0.getImage()
 param["simulator"]["model"] = "Roulette" 
-rou0 = SimImage( param, verbose=0 ).getImage()
+rousim0 = SimImage( param, verbose=0 )
+rou0 = rousim0.getImage()
 csimg.imageCompare( ray0, rou0, "Raytrace", "Roulette" ) 
 ```
+
+We can also get annotations on the images, like this:
 
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
 param["simulator"]["centred"] = False
-ray = SimImage( param, verbose=0 ).getAnnotated(convergenceRing=None,centrePoint=None)
+ray0a = rousim0.getAnnotated(convergenceRing=None,centrePoint=None)
 param["simulator"]["model"] = "Roulette" 
-rou = SimImage( param, verbose=0 ).getAnnotated(convergenceRing=None,centrePoint=None)
-csimg.imageCompare( ray, rou, "Raytrace", "Roulette" ) 
+rou0a = rousim0.getAnnotated(convergenceRing=None,centrePoint=None)
+csimg.imageCompare( ray0a, rou0a, "Raytrace", "Roulette" ) 
 ```
 
+The roulette simulation seems perfect within the convergence ring.
+
+::: {warning}
+The call to `setRow()` overrides settings which have been set
+manually.  Hense we need to reset `simulator.centred`, but we
+do not have to reset `simulator.model` to Raytrace.
+:::
+
++++
+
 ## The full image set
+
+We can repeat the simulation on all the selected imags.
+
 
 ```{code-cell} ipython3
 for index, row in df.iterrows():
@@ -106,8 +135,9 @@ for index, row in df.iterrows():
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
 ```
 
-Here we observe very good match between the roulette and raytrace simulations, except
-possibly where the visible image is tiny and centred, where it is difficult to judge.
+Here we observe very good match between the roulette and raytrace
+simulations, except possibly where the visible image is tiny and centred,
+where it is difficult to judge.
 
 +++
 

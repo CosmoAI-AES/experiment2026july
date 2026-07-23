@@ -9,3 +9,5 @@ test.*
 
 # MyST build outputs
 _build
+
+node_modules

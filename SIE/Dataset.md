@@ -64,7 +64,7 @@ examples of strong lensing, erring on the side of wider ranges.
 
 ::: {note} Further reading
 The dataset generation is outlined in more detail in
-[](xref:cosmosim/demo/ML/Dataset.ipynb).
+[](xref:cosmosim/dataset-1/).
 Her we focus on the distribution used in this particular experiment.
 :::
 
