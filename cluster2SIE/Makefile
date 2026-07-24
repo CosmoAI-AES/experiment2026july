@@ -24,10 +24,12 @@ experiment%/eval.log: experiment%  experiment%/model.pt
 	echo Done $<
 
 clean:
-	rm -f *.csv
-	rm -rf images resimulation
 	rm -f Dataset.ipynb
 	cd experiment002 && $(MAKE) $@
+
+cclean: clean
+	rm -f *.csv
+	rm -rf images resimulation
 
 ipynb: Dataset.ipynb
 	cd experiment002 && $(MAKE) $@
