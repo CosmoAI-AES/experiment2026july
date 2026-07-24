@@ -8,4 +8,6 @@ J=jupytext --execute -w --to ipynb
 clean:
 	rm -f *.ipynb
 
-pdf:
+SIE-%.pdf: %.md
+	myst build --pdf $<
+pdf: SIE-Testing.pdf SIE-Resimulation.pdf
