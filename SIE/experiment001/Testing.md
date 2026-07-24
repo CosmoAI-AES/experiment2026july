@@ -207,10 +207,10 @@ For now, we test in just one image.
 ```{code-cell} ipython3
 imsim = rg.Resim(gtw.iloc[0],param=param,verbose=0)
 im = imsim.getImage()
-imshow( im )
 ```
 
-We can make the same simulation from the reconstructed amplitudes and compare.
+We can make the same simulation from the reconstructed amplitudes 
+and compare the images.
 
 ```{code-cell} ipython3
 dfw = df.loc[ worst ]
@@ -237,7 +237,7 @@ for fn in worst:
 We add the `savefig`-line to get image files which we can compare 
 to the following experiments without having to jump within the 
 notebook-document.
-```
+:::
 
 
 No visible discrepancy.  We can continue with the best images, obviously expecting perfect match again.
@@ -274,7 +274,8 @@ raytrace simulation, which is accurate.
 The `SimImage` simulator is parameterised in a slightly different
 way.  We need to add the row data from the dataset to the 
 `Parameters` object instead of passing it as a separate argument.
-To avoid interference, we make a copy of `params`.
+To avoid interference, we make a new `Parameters` object for
+the raytrace simulation.
 
 ```{code-cell} ipython3
 cfg["simulator"]["model"] = "Raytrace"
@@ -284,6 +285,9 @@ p2 = cs.Parameters( cfg )
 from pprint import pprint
 pprint( cfg )
 ```
+
+We can review these parameters and make sure that they match
+the original `param` when it should.
 
 ```{code-cell} ipython3
 for fn in worst:

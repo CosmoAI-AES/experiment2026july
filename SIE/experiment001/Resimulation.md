@@ -1,6 +1,13 @@
 ---
+authors:
+- name: Hans Georg Schaathun
+exports:
+- format: pdf
+  output: SIE-Resimulation.pdf
+  template: lapreprint
 jupytext:
-  cell_metadata_filter: -all
+  notebook_metadata_filter: all,-language_info,-jupytext.text_representation.jupytext_version
+  cell_metadata_filter: tags
   formats: md:myst,ipynb
   text_representation:
     extension: .md
@@ -11,6 +18,9 @@ kernelspec:
   name: python3
   display_name: Python 3 (ipykernel)
   language: python
+parts:
+  abstract: This is work in progress.  We are debugging the report format.
+title: Resimulation from the SIE Experiment
 ---
 
 # Roulette Resimulation (Experiment July 2026)
@@ -137,6 +147,7 @@ for index, row in df.iterrows():
     rou = SimImage( param, verbose=0
         ).getAnnotated(centrePoint=None)
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
+    plt.savefig( f"resim1-{fn}" )
 ```
 
 Image 12890 is strange, where the Roulette formalism gives a very incomplete reconstruction.
@@ -179,6 +190,7 @@ for index, row in df.iterrows():
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+    plt.savefig( f"resim2-{fn}" )
 ```
 
 Note that we have simulated without centring.
