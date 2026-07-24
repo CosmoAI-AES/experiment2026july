@@ -13,7 +13,6 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.5
 kernelspec:
   name: python3
   display_name: Python 3 (ipykernel)
@@ -147,7 +146,7 @@ for index, row in df.iterrows():
     rou = SimImage( param, verbose=0
         ).getAnnotated(centrePoint=None)
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
-    plt.savefig( f"resim1-{fn}" )
+    plt.savefig( f"resim1-{index}" )
 ```
 
 Image 12890 is strange, where the Roulette formalism gives a very incomplete reconstruction.
@@ -190,7 +189,7 @@ for index, row in df.iterrows():
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
-    plt.savefig( f"resim2-{fn}" )
+    plt.savefig( f"resim2-{index}" )
 ```
 
 Note that we have simulated without centring.
