@@ -1,4 +1,4 @@
-all: experiment001/eval.log
+all: experiment001/model.pth
 
 log=datagen.log 
 err=datagen.err 
