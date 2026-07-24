@@ -3,7 +3,6 @@ authors:
   - name: Hans Georg Schaathun
 title: Testing of SIE Experiment
 jupytext:
-  cell_metadata_filter: -all
   formats: md:myst,ipynb
   text_representation:
     extension: .md
