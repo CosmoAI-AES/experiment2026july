@@ -13,9 +13,32 @@ in [](Training.ipynb), with the following steps.
 
 This is based on the general [](xref:cosmoai/pipeline#ml-pipeline).
 
+You can download and run the different documents in Jupyter Lab.
+Notebooks and datafiles can be downloaded one by one from the pages,
+or you can clone the entire site from
+[github](https://github.com/CosmoAI-AES/experiment2026july/).
+
+To install the dependencies, download 
+[requirements.txt](requirements.txt) and use
+```sh
+pip install -r requirements.txt
+```
+
+To open the files from git in jupyter lab, they must be converted
+from md:myst to ipynb by `jupytext`.
+If you have `make` you can use the Makefile provided.
+```sh
+make ipynb
+```
+
 ::: {note} Software Versions
-The experiments are executed with CosmoSim v3.2.4 and droulette v0.2.
-Earlier versions will not work, for various reasons.
+The experiments are executed with CosmoSim v3.3 and droulette v0.2.1.
+
+CosmoSim v3.2.4 gives a numeric inaccuracy in the resimulation
+from roulette amplitudes, although other parts of the experiment
+will work.
+
+Earlier versions are not expected to work, for various reasons.
 :::
 
 
