@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -20,7 +20,8 @@ generally better to run it in the background, from the command line.
 here, I will outline the process as I have used it.
 
 **Requirement**
-This demo requires CosmoSim v3.1 and droulette v0.1.
+This demo requires CosmoSim v3.2.4 or higher and droulette v0.2.
+It has been reviewed with CosmoSim v3.3.0.
 
 **Step 1.** Generate a dataset
 This is discussed in detail in [](SIE/Dataset.ipynb).

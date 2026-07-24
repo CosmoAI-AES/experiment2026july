@@ -7,3 +7,4 @@ pandas
 jupytext
 jupyter-book
 jupyterlab-myst
+jupyterlab
