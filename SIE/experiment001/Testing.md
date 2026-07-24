@@ -230,7 +230,15 @@ for fn in worst:
     gtsim = rg.Resim(gt.loc[fn],param=param,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Ground Truth", axiscross=True )
+    plt.savefig( f"resim-{fn}" )
 ```
+
+::: {note}
+We add the `savefig`-line to get image files which we can compare 
+to the following experiments without having to jump within the 
+notebook-document.
+```
+
 
 No visible discrepancy.  We can continue with the best images, obviously expecting perfect match again.
 
@@ -241,6 +249,7 @@ for fn in best:
     gtsim = rg.Resim(gt.loc[fn],param=param,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Ground Truth" )
+    plt.savefig( f"resim-{fn}" )
 ```
 
 Again, there is no visible discrepancy.
@@ -286,6 +295,7 @@ for fn in worst:
     csimg.imageCompare( dfim, gtim, 
                         fn, "Original raytrace simulation", 
                         axiscross=True )
+    plt.savefig( f"lens-{fn}" )
 ```
 
 The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
@@ -301,6 +311,7 @@ for fn in best:
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+    plt.savefig( f"lens-{fn}" )
 ```
 
 Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
@@ -353,6 +364,7 @@ for fn in worst:
     csimg.imageCompare( dfim, gtim, 
                         fn, "Original raytrace simulation", 
                         axiscross=True )
+    plt.savefig( f"file-{fn}" )
 ```
 
 The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
@@ -368,19 +380,10 @@ for fn in best:
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+    plt.savefig( f"file-{fn}" )
 ```
 
 Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
-
-Finally, it may be useful to see the critical curves and convergence rings.
-
-```{code-cell} ipython3
-for fn in best:
-    dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
-    p2.setRow( orig.loc[fn] )
-    gtim = dg.SimImage(param=p2,verbose=0).getImage()
-    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
-```
 
 ## Conclusion
 
