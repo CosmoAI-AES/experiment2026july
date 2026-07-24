@@ -252,38 +252,6 @@ Right, so differences are around $10^{-14}$ and smaller.
 
 +++
 
-## Comparison to v3.2
-
-The above tests have been reviewed with CosmoSim v.3.3.0, which corrects
-an arguable problem in v3.2.4.  The old mode of operation is still available by
-setting `resimulation.drawmode` to `"origin"`.  Just to demonstrate the difference, we include a test in this mode as well.
-
-We define a new `Parameters` object setting the `drawmode`.
-
-```{code-cell} ipython3
-cfg = { "simulator" : { "cropsize" : 256, "nterms" : 4 }
-      , "resimulation" : { "drawmode" : "origin" }
-      }
-rp = Parameters( cfg )
-```
-
-Now we can run he simulation as we did before.
-
-```{code-cell} ipython3
-for index, row in df.iterrows():
-    param.setRow( row )
-    param["simulator"]["centred"] = False
-    imsim = SimImage( param, verbose=0 )
-    ray = imsim.getImage()
-    rr = imsim.getData()
-    rou = Resim( rr, rp, verbose=0 ).getImage()
-    csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
-```
-
-Here we see a minor discrepancy between the resimulation and the original
-simulation in some of the images.
-
-
 ## Closure
 
 This comparison shows good match between raytrace and roulette, except possibly for small images close to the origin.
