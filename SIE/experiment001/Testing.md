@@ -219,7 +219,44 @@ im2 = imsim2.getImage()
 csimg.imageCompare( im, im2, "Ground Truth", "Reconstructed" )
 ```
 
-This looks like perfect match.
+This looks all black, which is disconserting.
+To investigate we need to explore its parameters.
+First  we identify the filename.
+
+```{code-cell} ipython3
+fn0 = worst[0]
+print( fn0 )
+```
+
+Then we can show the parameters.
+
+```{code-cell} ipython3
+display( df.loc[ worst[0] ] )
+```
+
+This is rather low luminosity and large source size, which means that the
+light is spread out, and possibly faint.
+Let's check the maximum pixel values.
+
+```{code-cell} ipython3
+dfsim = rg.Resim(df.loc[fn0],param=param,verbose=0)
+dfim = dfsim.getImage()
+gtsim = rg.Resim(gt.loc[fn0],param=param,verbose=0)
+gtim = gtsim.getImage()
+print( gtim.flatten().max(), dfim.flatten().max() )
+```
+
+Right, 34 is not far from black.  We can boost the contrsst simply by multiplying by 4.  We are still well within the 8-bit integer range.
+
+```{code-cell} ipython3
+csimg.imageCompare( dfim*4, gtim*4, fn0, "Ground Truth" )
+```
+
+Now we can see the faint galaxy, and the match is perfect.
+
++++
+
+## Full image set
 
 We can do the same for all the top and bottom three.
 
@@ -240,7 +277,9 @@ notebook-document.
 :::
 
 
-No visible discrepancy.  We can continue with the best images, obviously expecting perfect match again.
+No visible discrepancy.
+
+We can continue with the best images, obviously expecting perfect match again.
 
 ```{code-cell} ipython3
 for fn in best:
@@ -318,17 +357,15 @@ for fn in best:
     plt.savefig( f"lens-{fn}" )
 ```
 
-Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
+The match to raytrace simulations is not perfect.
+There is some numerical error around the primary image, although this may be invisible at low screen resolution.
 
-Finally, it may be useful to see the critical curves and convergence rings.
+This kind of minor discrepancy is often caused by image post-processing, and may conceivable, in this case, be caused by the centring of the image.
+We will test this hypothesis in [](Resimulation.ipynb).
 
-```{code-cell} ipython3
-for fn in best:
-    dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
-    p2.setRow( orig.loc[fn] )
-    gtim = dg.SimImage(param=p2,verbose=0).getImage()
-    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
-```
+We see that the best images display a lot more visible light.
+
++++
 
 ## Using the roulette file
 

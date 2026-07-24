@@ -24,6 +24,10 @@ title: Resimulation from the SIE Experiment
 
 # Roulette Resimulation (Experiment July 2026)
 
+This document will investigate inaccuracies in the standard evaluation
+document, [](Testing.ipynb).
+We hypothesised that image centring causes minor numerical inaccuracy, 
+which differs between the original raytrace image and the roulette resimulation.
 
 We build on [](xref:cosmoai/demo03resimulation/).
 The following modules are needed.
@@ -86,7 +90,7 @@ From this dataset we pick just the selected rows.
 ```{code-cell} ipython3
 df = pd.read_csv( "../sie-dataset.csv", index_col="filename" )
 df = df.loc[best+worst]
-display( df )
+display( df.T )
 ```
 
 We will also need the simulator configuration from `sie-dataset.toml`.
@@ -102,13 +106,21 @@ Now we can run the simulator.
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
 param["simulator"]["centred"] = False
-raysim0 = SimImage( param, verbose=0 )
+raysim0 = SimImage( param.copy(), verbose=0 )
 ray0 = raysim0.getImage()
 param["simulator"]["model"] = "Roulette" 
 rousim0 = SimImage( param, verbose=0 )
 rou0 = rousim0.getImage()
 csimg.imageCompare( ray0, rou0, "Raytrace", "Roulette" ) 
 ```
+
+Here we cannot see the discrepancy that we found in [](Testing.ipynb).
+
++++
+
+::: {warning}
+We instantiate `raysim0` with `param.copy()` to make sure that we can reuse `raysim0` later with the same result.  Since `SimImage` does not copy the `Parameters` object, its configuration will change if the object is subsequently changed.
+:::
 
 We can also get annotations on the images, like this:
 
@@ -166,8 +178,6 @@ for index, row in df.iterrows():
     plt.savefig( f"resim1-{index}" )
 ```
 
-+++
-
 ## Resimulation
 
 +++
@@ -181,7 +191,10 @@ display( row )
 ```
 
 ```{code-cell} ipython3
-rp = Parameters( { "simulator" : { "cropsize" : 256, "nterms" : 4 } } )
+newcfg = { "simulator" : { "cropsize" : 256, "nterms" : 4, "centred" : False }
+         , "source" : { "mode" : "SersicSphere" }
+         } 
+rp = Parameters( newcfg )
 resimImage = Resim(  row, rp, verbose=0 ).getImage()
 csimg.imageCompare( resimImage, rou0, "Resimulation", "Original Roulette" )
 csimg.imageCompare( resimImage, ray0, "Resimulation", "Original Raytrace" )
@@ -214,6 +227,7 @@ print( "Centring:", param.get( "centred" ) )
 ## Centred mode
 
 Let us reset the simulator to use centred mode.
+Here we will see the numeric inaccuracy.
 
 ```{code-cell} ipython3
 with open( "../sie-dataset.toml", 'rb' ) as f:
@@ -229,6 +243,7 @@ for index, row in df.iterrows():
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
+    plt.savefig( f"centre-{index}" )
 ```
 
 This is also perfect.
