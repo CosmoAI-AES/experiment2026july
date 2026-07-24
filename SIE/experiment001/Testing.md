@@ -160,7 +160,8 @@ Before we can simulate, we need to set up some basic parameters.
 ```{code-cell} ipython3
 cfg = { "simulator" : { "imagesize" : 512
                       , "cropsize" : 256
-                      , "xireference" : True }
+                      , "xireference" : True
+                      , "nterms" : 4 }
       , "source" : { "mode" : "SersicSphere" } }
 param = cs.Parameters( cfg )
 ```
@@ -262,15 +263,20 @@ cfg["simulator"]["model"] = "Raytrace"
 cfg["simulator"]["centred"] = True
 cfg["lens"] = { "mode" : "SIE" }
 p2 = cs.Parameters( cfg )
+from pprint import pprint
+pprint( cfg )
+```
+
+```{code-cell} ipython3
 for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
     dfim = dfsim.getImage()
-    p2.setRow( orig.l )
-    p2["simulator"]["centred"] = True
-    print( p2.get( "centred" ) )
+    p2.setRow( orig.loc[fn] )
     gtsim = dg.SimImage(param=p2,verbose=0)
     gtim = gtsim.getImage()
-    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+    csimg.imageCompare( dfim, gtim, 
+                        fn, "Original raytrace simulation", 
+                        axiscross=True )
 ```
 
 The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 

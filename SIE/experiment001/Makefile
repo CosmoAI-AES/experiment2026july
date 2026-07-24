@@ -7,3 +7,5 @@ J=jupytext --execute -w --to ipynb
 
 clean:
 	rm -f *.ipynb
+
+pdf:

@@ -153,12 +153,12 @@ It will be interesting to check if resimulation confirms the result.
 First a simple check with a single data point.
 
 ```{code-cell} ipython3
-row = imsim0.getData()
+row = raysim0.getData()
 display( row )
 ```
 
 ```{code-cell} ipython3
-rp = Parameters( { "simulator" : { "cropsize" : 256 } } )
+rp = Parameters( { "simulator" : { "cropsize" : 256, "nterms" : 4 } } )
 resimImage = Resim(  row, rp, verbose=0 ).getImage()
 csimg.imageCompare( resimImage, rou0, "Resimulation", "Original Roulette" )
 csimg.imageCompare( resimImage, ray0, "Resimulation", "Original Raytrace" )
@@ -261,7 +261,7 @@ setting `resimulation.drawmode` to `"origin"`.  Just to demonstrate the differen
 We define a new `Parameters` object setting the `drawmode`.
 
 ```{code-cell} ipython3
-cfg = { "simulator" : { "cropsize" : 256 }
+cfg = { "simulator" : { "cropsize" : 256, "nterms" : 4 }
       , "resimulation" : { "drawmode" : "origin" }
       }
 rp = Parameters( cfg )
