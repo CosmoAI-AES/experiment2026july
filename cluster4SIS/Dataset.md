@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -19,11 +19,6 @@ In this demo we show the generation of a dataset for machine
 learning sporting two SIE lenses.
 To run the notebook, you will have to download several datafiles
 from [](Cluster4.md).
-
-::: {warning} 
-This demo uses a feature from CosmoSim v3.2, taking the Critical Curve
-into account when placing the sources.  This will not work in v3.1.
-:::
 
 ## Preparation
 
@@ -104,7 +99,7 @@ def mkannotation(ob):
 We use the same datasets as before, but generate new and annotated images.
 
 ```{code-cell} ipython3
-ims = [ mkimg(ob) for ob in obs ]
+ims = [ mkannotation(ob) for ob in obs ]
 csimg.showImages( ims, size=(2,4), titles=ts )
 ```
 
