@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.3
+    jupytext_version: 1.19.5
 kernelspec:
   name: python3
   display_name: Python 3 (ipykernel)
@@ -14,6 +14,7 @@ kernelspec:
 ---
 
 # Roulette Resimulation (Experiment July 2026)
+
 
 We build on [](xref:cosmoai/demo03resimulation/).
 The following modules are needed.
@@ -92,8 +93,8 @@ Now we can run the simulator.
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
 param["simulator"]["centred"] = False
-imsim0 = SimImage( param, verbose=0 )
-ray0 = imsim0.getImage()
+raysim0 = SimImage( param, verbose=0 )
+ray0 = raysim0.getImage()
 param["simulator"]["model"] = "Roulette" 
 rousim0 = SimImage( param, verbose=0 )
 rou0 = rousim0.getImage()
@@ -105,7 +106,7 @@ We can also get annotations on the images, like this:
 ```{code-cell} ipython3
 param.setRow( df.iloc[0] )
 param["simulator"]["centred"] = False
-ray0a = rousim0.getAnnotated(convergenceRing=None,centrePoint=None)
+ray0a = raysim0.getAnnotated(convergenceRing=None,centrePoint=None)
 param["simulator"]["model"] = "Roulette" 
 rou0a = rousim0.getAnnotated(convergenceRing=None,centrePoint=None)
 csimg.imageCompare( ray0a, rou0a, "Raytrace", "Roulette" ) 
@@ -138,9 +139,9 @@ for index, row in df.iterrows():
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
 ```
 
-Here we observe very good match between the roulette and raytrace
-simulations, except possibly where the visible image is tiny and centred,
-where it is difficult to judge.
+Image 12890 is strange, where the Roulette formalism gives a very incomplete reconstruction.
+The other images show very good match between the roulette and raytrace
+simulations, although it may be hard to judge when the visible image is small and close to the origin.
 
 +++
 
@@ -203,7 +204,7 @@ for index, row in df.iterrows():
     ray = imsim.getImage()
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
-    csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+    csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
 ```
 
 This is also perfect.
@@ -276,7 +277,7 @@ for index, row in df.iterrows():
     ray = imsim.getImage()
     rr = imsim.getData()
     rou = Resim( rr, rp, verbose=0 ).getImage()
-    csimg.imageCompare( ray, rou, "Raytrace", "Roulette", axiscross=True ) 
+    csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
 ```
 
 Here we see a minor discrepancy between the resimulation and the original

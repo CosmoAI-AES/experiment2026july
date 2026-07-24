@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.3
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -233,6 +233,10 @@ for fn in best:
     csimg.imageCompare( dfim, gtim, fn, "Ground Truth" )
 ```
 
+Again, there is no visible discrepancy.
+
++++
+
 ## Simulations from Lens Parameters
 
 We can also load the original lens parameters, from which 
@@ -261,7 +265,7 @@ p2 = cs.Parameters( cfg )
 for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
     dfim = dfsim.getImage()
-    p2.setRow( orig.loc[fn] )
+    p2.setRow( orig.l )
     p2["simulator"]["centred"] = True
     print( p2.get( "centred" ) )
     gtsim = dg.SimImage(param=p2,verbose=0)
