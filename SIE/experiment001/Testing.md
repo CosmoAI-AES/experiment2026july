@@ -18,7 +18,6 @@ exports:
     - format: pdf
       template: lapreprint
       output: SIE-Testing.pdf
-
 parts:
    abstract: |
       This is work in progress.  We are debugging the report format.
@@ -257,6 +256,73 @@ the ground truth was computed.
 ```{code-cell} ipython3
 orig = pd.read_csv( "../sie-dataset.csv", index_col="filename" )
 display( orig.head() )
+```
+
+This dataset is different from the others, giving physical parameters
+of the lens instead of roulette amplitudes in a point of observation.
+Thus, we need a different simulator.  On a positive note, we can use
+raytrace simulation, which is accurate.
+
+The `SimImage` simulator is parameterised in a slightly different
+way.  We need to add the row data from the dataset to the 
+`Parameters` object instead of passing it as a separate argument.
+To avoid interference, we make a copy of `params`.
+
+```{code-cell} ipython3
+cfg["simulator"]["model"] = "Raytrace"
+cfg["simulator"]["centred"] = True
+cfg["lens"] = { "mode" : "SIE" }
+p2 = cs.Parameters( cfg )
+from pprint import pprint
+pprint( cfg )
+```
+
+```{code-cell} ipython3
+for fn in worst:
+    dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
+    dfim = dfsim.getImage()
+    p2.setRow( orig.loc[fn] )
+    gtsim = dg.SimImage(param=p2,verbose=0)
+    gtim = gtsim.getImage()
+    csimg.imageCompare( dfim, gtim, 
+                        fn, "Original raytrace simulation", 
+                        axiscross=True )
+```
+
+The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
+It is significant that the shadow in the difference image around the primary image is either black or white, never both.
+This means that the image is smaller or larger, and not rotated or awfully misshaped in general.
+Clearly, this is a limitation of the roulette formalism, since there is no difference between reconstructed and ground truth simulation.
+
+```{code-cell} ipython3
+for fn in best:
+    dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
+    dfim = dfsim.getImage()
+    p2.setRow( orig.loc[fn] )
+    gtsim = dg.SimImage(param=p2,verbose=0)
+    gtim = gtsim.getImage()
+    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+```
+
+Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
+
+Finally, it may be useful to see the critical curves and convergence rings.
+
+```{code-cell} ipython3
+for fn in best:
+    dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
+    p2.setRow( orig.loc[fn] )
+    gtim = dg.SimImage(param=p2,verbose=0).getImage()
+    csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
+```
+
+## Using the roulette file
+
+We redefine `gt` from the original roulette CSV file and rerun the
+last experiment.
+
+```{code-cell} ipython3
+gt = pd.read_csv( "../sie-roulette.csv", index_col="filename" )
 ```
 
 This dataset is different from the others, giving physical parameters
