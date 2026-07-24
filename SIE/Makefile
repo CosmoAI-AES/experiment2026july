@@ -34,9 +34,9 @@ experiment%/eval.log: experiment%  experiment%/model.pt
 clean:
 	rm -f Dataset.ipynb
 	cd experiment001 && $(MAKE) $@
-cclean: clean
-	rm -f *.csv
+distclean: clean
 	rm -rf images resimulation
+	rm -f */model.pth
 
 ipynb: Dataset.ipynb
 	cd experiment001 && $(MAKE) $@
