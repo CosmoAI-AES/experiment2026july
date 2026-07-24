@@ -1,4 +1,7 @@
 ---
+authors:
+  - name: Hans Georg Schaathun
+title: Testing of SIE Experiment
 jupytext:
   cell_metadata_filter: -all
   formats: md:myst,ipynb
@@ -11,6 +14,14 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+exports:
+    - format: pdf
+      template: lapreprint
+      output: SIE-Testing.pdf
+
+parts:
+   abstract: |
+      This is work in progress.  We are debugging the report format.
 ---
 
 # Evaluation of machine learning for SIE
