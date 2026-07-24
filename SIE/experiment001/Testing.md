@@ -6,6 +6,8 @@ exports:
   output: SIE-Testing.pdf
   template: lapreprint
 jupytext:
+  notebook_metadata_filter: all,-language_info,-jupytext.text_representation.jupytext_version
+  cell_metadata_filter: tags
   formats: md:myst,ipynb
   text_representation:
     extension: .md
