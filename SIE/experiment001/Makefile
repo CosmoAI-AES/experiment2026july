@@ -11,3 +11,6 @@ clean:
 SIE-%.pdf: %.md
 	myst build --pdf $<
 pdf: SIE-Testing.pdf SIE-Resimulation.pdf
+
+%.log: %.md
+	$J "$<" > "$@" 2>&1 

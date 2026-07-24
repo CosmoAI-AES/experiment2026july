@@ -146,12 +146,25 @@ for index, row in df.iterrows():
     rou = SimImage( param, verbose=0
         ).getAnnotated(centrePoint=None)
     csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
-    plt.savefig( f"resim1-{index}" )
+    plt.savefig( f"annot1-{index}" )
 ```
 
 Image 12890 is strange, where the Roulette formalism gives a very incomplete reconstruction.
 The other images show very good match between the roulette and raytrace
 simulations, although it may be hard to judge when the visible image is small and close to the origin.
+
+```{code-cell} ipython3
+for index, row in df.iterrows():
+    param.setRow( row )
+    param["simulator"]["centred"] = False
+    ray = SimImage( param, verbose=0
+        ).getImage()
+    param["simulator"]["model"] = "Roulette" 
+    rou = SimImage( param, verbose=0
+        ).getImage()
+    csimg.imageCompare( ray, rou, index, "Roulette", axiscross=True ) 
+    plt.savefig( f"resim1-{index}" )
+```
 
 +++
 

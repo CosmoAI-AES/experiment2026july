@@ -1,7 +1,7 @@
 [problem]
 filename = "cluster2-roulette.csv"
 dataset =  "cluster2-dataset.toml"
-variables = [ "sigma", "xiX", "xiY" ]
+variables = [ "sigma", "luminosity", "n_sersic", "xiX", "xiY" ]
 nterms = 4 
 
 [dataset]
