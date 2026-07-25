@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -116,7 +116,7 @@ colerrors["Relative MAE"] = colerrors["MAE"] / colerrors["mean"]
 display( colerrors )
 ```
 
-This looks good with mean relative errors less than $10^{-7}$, and no column is particularly bad or good.
+This looks good with mean relative errors less than $10^{-8}$, and no column is particularly bad or good.
 
 +++
 
@@ -263,10 +263,7 @@ for fn in worst:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
-The match is not perfect, but we do see that the primary image is correctly placed. The shape is not accurate on the edges. 
-It is significant that the shadow in the difference image around the primary image is either black or white, never both.
-This means that the image is smaller or larger, and not rotated or awfully misshaped in general.
-Clearly, this is a limitation of the roulette formalism, since there is no difference between reconstructed and ground truth simulation.
+The match is not perfect, but it may be no more than the numeric inaccuracy due to post-processing centring the image for machine learning. as we discussed in the report from the [SIE experiment](/SIE/experiment001/Testing.ipynb).
 
 ```{code-cell} ipython3
 for fn in best:
@@ -278,7 +275,29 @@ for fn in best:
     csimg.imageCompare( dfim, gtim, fn, "Original raytrace simulation", axiscross=True )
 ```
 
-Interestingly, the best images do not perform any better than the worst in terms of visual comparison between roulettes and raytrace.
+Now, this looks bad.Let's quickly check that the primary image is within the frame.
+
+```{code-cell} ipython3
+for fn in best:
+    t = df.loc[fn] 
+    print( fn, ( t["xiX"], t["xiY"] ) )
+```
+
+The frame ranges between $\pm128$, so the first and the last items are actually drawn outside, which may explain the error.
+What we can see in the image may well be secondary images, outside the convergence ring as well as spurious iamges.
+
+The middle image is harder to explain.  The image is correct in position and overall shape, but the discrepancy is a bit too much to attribute to numerical error without investigation. We remember that the resimulation matches the original roulette simulation too.
+It may be useful to enhance the contrast, by boosting the light intensity of the image.
+
+```{code-cell} ipython3
+fn = best[1]
+dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
+p2.setRow( orig.loc[fn] )
+gtim = dg.SimImage(param=p2,verbose=0).getImage()
+csimg.imageCompare( 3*dfim, 3*gtim, fn, "Original raytrace simulation", axiscross=True )
+```
+
+This shows better the effect of the spurious image in the lower right quarter, and how the primary image is elongated towards the spurious image in the roulette formalism.  Taking this effect together with the numerical error from centring the image, may explain the discrepancy.
 
 +++
 
@@ -286,6 +305,8 @@ Interestingly, the best images do not perform any better than the worst in terms
 
 +++
 
-We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
+There are several problems with this experiment.  The dataset creates images outside the frame, so we should make more care in designing the distribution. We also observe artifacts which we cannot fully explain.  Both post-processing effects and roulette artifacts can explain a lot, but not necessarily all of it. This requires further research.
 
-This means that there is nothing to gain from further research on machine learning models at this stage.
+```{code-cell} ipython3
+
+```

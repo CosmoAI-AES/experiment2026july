@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -104,7 +104,7 @@ def mkannotation(ob):
 We use the same datasets as before, but generate new and annotated images.
 
 ```{code-cell} ipython3
-ims = [ mkimg(ob) for ob in obs ]
+ims = [ mkannotation(ob) for ob in obs ]
 csimg.showImages( ims, size=(2,4), titles=ts )
 ```
 
@@ -118,3 +118,7 @@ We have attemmpted to design the dataset so that it displays interesting
 samples of strong lensing.  
 More research is needed on actual distributions of observed lenses, and
 how a representative sample can be designed for machine learning.
+
+```{code-cell} ipython3
+
+```

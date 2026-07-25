@@ -82,7 +82,7 @@ python -m droulette.model --config experiment001/ml.toml
 ```
 
 All the results will be placed in this subdirectory.
-Evaluation of these results is discussed further in [](experiment/Testing.ipynb).
+Evaluation of these results is discussed further for each experiment.
 
 ::: {tip}
 The droulette package also has support for batch traning multiple models

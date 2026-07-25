@@ -29,7 +29,7 @@ document, [](Testing.ipynb).
 We hypothesised that image centring causes minor numerical inaccuracy, 
 which differs between the original raytrace image and the roulette resimulation.
 
-We build on [](xref:cosmoai/demo03resimulation/).
+We build on [](xref:cosmoai/demo03resimulation).
 The following modules are needed.
 
 ```{code-cell} ipython3

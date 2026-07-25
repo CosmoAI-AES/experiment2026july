@@ -6,7 +6,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.19.4
+    jupytext_version: 1.19.5
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -139,7 +139,8 @@ sse.nlargest(3)
 sse.nsmallest(3)
 ```
 
-We note that the errors are small, but there is also a huge span between the best and the worst.
+We note that the errors are somewhat larger than for the singleton SIE test, but still very small
+There is still a huge span between the best and the worst.
 For the purpose of this test, we do not assume that we have access to the original images, but we can resimulate them from the roulette amplitudes.
 First we record the filenames.
 
@@ -228,6 +229,63 @@ for fn in best:
     csimg.imageCompare( dfim, gtim, "Reconstructed", "Ground Truth" )
 ```
 
+These images appear all black.
+
++++
+
+## Investigating all-black images
+
+We can check that they are indeed all black.
+
+```{code-cell} ipython3
+for fn in best:
+    dfim = rg.Resim(df.loc[fn],param=param,verbose=0).getImage()
+    gtim = rg.Resim(gt.loc[fn],param=param,verbose=0).getImage()
+    print( fn, dfim.flatten().max(), gtim.flatten().max() )
+```
+
+We can have a look at critical source parameters.
+
+```{code-cell} ipython3
+for fn in best:
+    t = df.loc[fn]
+    print( fn, f"Luminosity {t["luminosity"]}, size {t["sigma"]}" )
+```
+
+There should be no issue with the amount of light here.
+A final hypothesis is that the image is shown outside the image area.
+We can try to increase the image size.
+
+```{code-cell} ipython3
+from copy import deepcopy 
+cfg1 = deepcopy( cfg )
+cfg1["simulator"]["cropsize"] = 512
+param1 = cs.Parameters( cfg1 )
+print( json.dumps( cfg1, indent=4 ) )
+```
+
+```{code-cell} ipython3
+for fn in best:
+    dfsim = rg.Resim(df.loc[fn],param=param1,verbose=0)
+    dfim = dfsim.getImage()
+    gtsim = rg.Resim(gt.loc[fn],param=param1,verbose=0)
+    gtim = gtsim.getImage()
+    csimg.imageCompare( dfim, gtim, "Reconstructed", "Ground Truth" )
+```
+
+Now we do see an image in the lower left corner of the last image.
+We can look at the apparent source position from the dataset.
+
+```{code-cell} ipython3
+for fn in best:
+    t = df.loc[fn]
+    print( fn, ( t["xiX"], t["xiY"] ) )
+```
+
+There we are, the reference point, where the image is drawn, is outside the frame. which is centred at the origin and extends to $\pm256$.
+
++++
+
 ## Simulations from Lens Parameters
 
 We can also load the original lens parameters, from which 
@@ -251,7 +309,7 @@ To avoid interference, we make a copy of `params`.
 ```{code-cell} ipython3
 cfg["simulator"]["model"] = "Raytrace"
 cfg["simulator"]["centred"] = False
-cfg["lens"] = { "mode" : "SIE" }
+cfg["lens"] = { "mode" : "SIS" }
 p2 = cs.Parameters( cfg )
 for fn in worst:
     dfsim = rg.Resim(df.loc[fn],param=param,verbose=0)
@@ -286,6 +344,9 @@ Interestingly, the best images do not perform any better than the worst in terms
 
 +++
 
-We see that this machine learning model make accurate prediction as far as optical perception goes, but there are limitations to the roulette representations.
+The image set for the 4xSIS clusters is not good, with images drawn outside the frame.
+Other than that we see the same great performance of the machine learning model as we have done in the other experiments.
 
-This means that there is nothing to gain from further research on machine learning models at this stage.
+```{code-cell} ipython3
+
+```
