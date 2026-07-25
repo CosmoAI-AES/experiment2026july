@@ -137,7 +137,7 @@ The roulette simulation seems perfect within the convergence ring.
 
 ::: {warning}
 The call to `setRow()` overrides settings which have been set
-manually.  Hense we need to reset `simulator.centred` each time,
+manually.  Hence we need to reset `simulator.centred` each time,
 but we do not have to reset `simulator.model` to Raytrace after the
 roulette simulation.
 :::
@@ -161,9 +161,9 @@ for index, row in df.iterrows():
     plt.savefig( f"annot1-{index}" )
 ```
 
-Image 12890 is strange, where the Roulette formalism gives a very incomplete reconstruction.
-The other images show very good match between the roulette and raytrace
-simulations, although it may be hard to judge when the visible image is small and close to the origin.
+These images show good match between raytrace and roulette, although it may be hard to judge when the visible image is small and close to the origin. 
+Where the primary image is far from the origin, the match looks perfect.
+It may be somewhat easier to see without the annotations.
 
 ```{code-cell} ipython3
 for index, row in df.iterrows():
@@ -294,8 +294,10 @@ Right, so differences are around $10^{-14}$ and smaller.
 ## Closure
 
 This comparison shows good match between raytrace and roulette, except possibly for small images close to the origin.
-It also demonstrates that the new mode of operation in v3.3 is a
-necessary improvement.
+It also demonstrates that the new mode of operation in v3.3 is a necessary improvement.
+
+Using roulette resimulation to validate machine learning predictions, we have to expect a numeric inaccuracy, due to the centring of the images subjected to the machine learning model.
+This is probably not a problem in practice, since observational images will show all sorts of inaccuracies in any event.
 
 ```{code-cell} ipython3
 

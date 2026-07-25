@@ -219,8 +219,16 @@ im2 = imsim2.getImage()
 csimg.imageCompare( im, im2, "Ground Truth", "Reconstructed" )
 ```
 
-This looks all black, which is disconserting.
-To investigate we need to explore its parameters.
+THis looks good, but the contrast is low, and the image may not be visible on all screens.
+In fact, I have reviewed this test on different screens, and devised the test below when working on a screen where this did look all black.
+
++++
+
+## Dealing with low contrast images
+
++++
+
+When images look all black, it is worth investigating its parameters.
 First  we identify the filename.
 
 ```{code-cell} ipython3
@@ -439,3 +447,7 @@ The discrepnacy in resimulation is not present in original roulette
 simulaion.
 We explore this in a separate test of [](Resimulation.ipynb).
 :::
+
+```{code-cell} ipython3
+
+```

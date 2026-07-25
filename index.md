@@ -39,6 +39,10 @@ from roulette amplitudes, although other parts of the experiment
 will work.
 
 Earlier versions are not expected to work, for various reasons.
+
+Critical curves are drawn in some of the tests.
+These curves are probably not correct for cluster lenses.
+The implementation will be revised in future versions.
 :::
 
 
